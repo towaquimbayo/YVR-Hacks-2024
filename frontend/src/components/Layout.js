@@ -14,8 +14,12 @@ export default function Layout({ title, isLandingPage = false, children }) {
           {isLandingPage ? "Crow's Nest" : `${title} | Crow's Nest`}
         </title>
       </Helmet>
-      <SideNav />
-      <div className="container">{children}</div>
+      <div className="flex h-screen bg-gray-200 p-3">
+        <SideNav />
+        <div className="bg-gray-100 w-full rounded-3xl p-3">
+          {children}
+        </div>
+      </div>
     </>
   );
 }
