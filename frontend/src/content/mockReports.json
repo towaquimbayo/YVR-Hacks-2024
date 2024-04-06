@@ -1,0 +1,222 @@
+[
+  {
+    "id": 0,
+    "title": "Baggage Conveyor Jam",
+    "description": "One of the baggage conveyors in Terminal A has jammed, causing delays in luggage delivery.",
+    "category": "Technical Malfunction",
+    "priority": "High",
+    "timestamp": "2024-04-06T10:30:00",
+    "location": "Terminal A",
+    "video-clip": "https://example.com/baggage_conveyor_jam.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 1,
+    "title": "Foul Odor in Restroom",
+    "description": "Unpleasant smell detected in the restroom near Gate B12, affecting passenger experience.",
+    "category": "Sanitary Issue",
+    "priority": "Medium",
+    "timestamp": "2024-04-06T11:15:00",
+    "location": "Gate B12",
+    "video-clip": "https://example.com/restroom_odor.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 2,
+    "title": "Security Checkpoint Congestion",
+    "description": "Long queues observed at the security checkpoint in Terminal C, causing delays for departing passengers.",
+    "category": "Crowd Management",
+    "priority": "High",
+    "timestamp": "2024-04-06T12:00:00",
+    "location": "Terminal C",
+    "video-clip": "https://example.com/security_congestion.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 3,
+    "title": "Food Spill in Food Court",
+    "description": "A large spill of food and beverages occurred in the food court area, creating a slip hazard.",
+    "category": "Cleanliness",
+    "priority": "Medium",
+    "timestamp": "2024-04-06T13:20:00",
+    "location": "Food Court",
+    "video-clip": "https://example.com/food_spill.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 4,
+    "title": "Broken Escalator",
+    "description": "The escalator leading to the departure gates in Terminal D is out of service, requiring maintenance.",
+    "category": "Infrastructure Issue",
+    "priority": "High",
+    "timestamp": "2024-04-06T14:45:00",
+    "location": "Terminal D",
+    "video-clip": "https://example.com/broken_escalator.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 5,
+    "title": "Flight Delay Announcement Failure",
+    "description": "The public announcement system in Terminal E failed to notify passengers of flight delays.",
+    "category": "Communication Failure",
+    "priority": "Medium",
+    "timestamp": "2024-04-06T15:10:00",
+    "location": "Terminal E",
+    "video-clip": "https://example.com/announcement_failure.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 6,
+    "title": "Lost Luggage Report",
+    "description": "Passenger reported their luggage missing upon arrival at the baggage claim area.",
+    "category": "Customer Service",
+    "priority": "High",
+    "timestamp": "2024-04-06T16:30:00",
+    "location": "Baggage Claim",
+    "video-clip": "https://example.com/lost_luggage.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 7,
+    "title": "Unauthorized Drone Activity",
+    "description": "Unauthorized drone spotted flying near the runway, posing a potential safety risk.",
+    "category": "Security Threat",
+    "priority": "High",
+    "timestamp": "2024-04-06T17:05:00",
+    "location": "Runway",
+    "video-clip": "https://example.com/drone_activity.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 8,
+    "title": "Broken Vending Machine",
+    "description": "One of the vending machines near Gate F5 is malfunctioning, not dispensing items properly.",
+    "category": "Facility Maintenance",
+    "priority": "Low",
+    "timestamp": "2024-04-06T18:20:00",
+    "location": "Gate F5",
+    "video-clip": "https://example.com/broken_vending_machine.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 9,
+    "title": "Passenger Altercation at Boarding Gate",
+    "description": "Two passengers engaged in a verbal altercation at the boarding gate of Flight 123.",
+    "category": "Security Incident",
+    "priority": "High",
+    "timestamp": "2024-04-06T19:40:00",
+    "location": "Boarding Gate of Flight 123",
+    "video-clip": "https://example.com/passenger_altercation.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 10,
+    "title": "Gate Change Confusion",
+    "description": "Passengers are confused about a last-minute gate change for Flight 456, causing congestion and frustration.",
+    "category": "Communication Issue",
+    "priority": "Medium",
+    "timestamp": "2024-04-07T08:00:00",
+    "location": "Terminal B",
+    "video-clip": "https://example.com/gate_change_confusion.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 11,
+    "title": "Emergency Medical Assistance",
+    "description": "A passenger has collapsed near the baggage claim area and requires immediate medical attention.",
+    "category": "Medical Emergency",
+    "priority": "High",
+    "timestamp": "2024-04-07T09:30:00",
+    "location": "Baggage Claim",
+    "video-clip": "https://example.com/medical_assistance.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 12,
+    "title": "Fuel Leakage on Tarmac",
+    "description": "A small aircraft is leaking fuel on the tarmac, requiring urgent containment and cleanup.",
+    "category": "Environmental Hazard",
+    "priority": "High",
+    "timestamp": "2024-04-07T11:15:00",
+    "location": "Tarmac",
+    "video-clip": "https://example.com/fuel_leakage.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 13,
+    "title": "Power Outage in Terminal",
+    "description": "A sudden power outage has occurred in Terminal F, affecting lighting, escalators, and flight information displays.",
+    "category": "Infrastructure Failure",
+    "priority": "High",
+    "timestamp": "2024-04-07T12:45:00",
+    "location": "Terminal F",
+    "video-clip": "https://example.com/power_outage.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 14,
+    "title": "Suspicious Package Found",
+    "description": "Security personnel discovered a suspicious package left unattended near the check-in counters, prompting evacuation protocols.",
+    "category": "Security Alert",
+    "priority": "High",
+    "timestamp": "2024-04-07T14:20:00",
+    "location": "Check-in Counters",
+    "video-clip": "https://example.com/suspicious_package.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 15,
+    "title": "Bird Strike on Runway",
+    "description": "A bird strike has occurred during takeoff, necessitating runway inspection and potential flight delays.",
+    "category": "Aviation Safety",
+    "priority": "High",
+    "timestamp": "2024-04-07T15:40:00",
+    "location": "Runway",
+    "video-clip": "https://example.com/bird_strike.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 16,
+    "title": "Water Pipe Burst in Restroom",
+    "description": "A water pipe has burst in the restroom near Gate C7, flooding the area and rendering it unusable.",
+    "category": "Facility Damage",
+    "priority": "High",
+    "timestamp": "2024-04-07T17:00:00",
+    "location": "Gate C7",
+    "video-clip": "https://example.com/water_pipe_burst.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 17,
+    "title": "Lost Child Report",
+    "description": "A child has been separated from their guardians in the crowded concourse area, requiring immediate assistance.",
+    "category": "Child Safety",
+    "priority": "High",
+    "timestamp": "2024-04-07T18:30:00",
+    "location": "Concourse",
+    "video-clip": "https://example.com/lost_child.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 18,
+    "title": "Air Conditioning Malfunction",
+    "description": "The air conditioning system in Terminal D is malfunctioning, causing discomfort for passengers and staff.",
+    "category": "Facility Maintenance",
+    "priority": "Medium",
+    "timestamp": "2024-04-07T19:45:00",
+    "location": "Terminal D",
+    "video-clip": "https://example.com/ac_malfunction.mp4",
+    "is-resolved": false
+  },
+  {
+    "id": 19,
+    "title": "Luggage Cart Collision",
+    "description": "Two luggage carts collided near the departure gates, causing minor injuries and obstruction.",
+    "category": "Accident",
+    "priority": "Medium",
+    "timestamp": "2024-04-07T20:55:00",
+    "location": "Departure Gates",
+    "video-clip": "https://example.com/luggage_cart_collision.mp4",
+    "is-resolved": false
+  }
+]
