@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+li:has(.active) {
+  @apply bg-gray-300;
+}

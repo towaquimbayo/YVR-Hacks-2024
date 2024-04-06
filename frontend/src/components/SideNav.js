@@ -1,32 +1,47 @@
-import { Home, BarChart2, Monitor, LogOut } from 'lucide-react';
+import { NavLink } from "react-router-dom";
+import { LayoutGrid, ClipboardList, Monitor, LogOut } from 'lucide-react';
 
 export default function SideNav() {
   return (
-    <div className="w-[220px] p-3 flex flex-col justify-between">
+    <div className="w-[220px] pr-3 py-3 flex flex-col justify-between">
       <div>
-        <h1 className="text-2xl font-bold">Crow's Nest</h1>
+        <h1 className="text-2xl font-bold pl-3">Crow's Nest</h1>
         <ul className="flex flex-col gap-6 pt-16">
-          <li>
-            <a href="/" className="text-lg flex items-center gap-2">
-              <Home size={18} /> Dashboard
-            </a>
+          <li className="rounded-lg p-2">
+            <NavLink
+              to="/"
+              className="text-md flex items-center gap-3"
+            >
+              <LayoutGrid size={18} /> Dashboard
+            </NavLink>
           </li>
-          <li>
-            <a href="/reports" className="text-lg flex items-center gap-2">
-              <BarChart2 size={18} /> Reports
-            </a>
+          <li className="rounded-lg p-2">
+            <NavLink
+              to="/reports"
+              className="text-md flex items-center gap-3"
+            >
+              <ClipboardList size={18} /> Reports
+            </NavLink>
           </li>
-          <li>
-            <a href="/live-monitor" className="text-lg flex items-center gap-2">
+          <li className="rounded-lg p-2">
+            <NavLink
+              to="/live-monitor"
+              className="text-md flex items-center gap-3"
+            >
               <Monitor size={18} /> Live Monitor
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>
 
-      <a href="/login" className="text-lg flex items-center gap-2">
-        <LogOut size={18} /> Logout
-      </a>
+      <div className="pl-3">
+        <NavLink
+          to="/login"
+          className="text-md flex items-center gap-3"
+        >
+          <LogOut size={18} /> Logout
+        </NavLink>
+      </div>
     </div>
   );
 }
