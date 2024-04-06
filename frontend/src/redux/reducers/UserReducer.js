@@ -1,7 +1,8 @@
 import { SET_USER, CLEAR_SESSION } from "../Types";
 
 export const initialState = {
-  isLoggedIn: false,
+  // @TODO: Set isLoggedIn to false
+  isLoggedIn: true,
 };
 
 export default function UserReducer(state = initialState, action) {

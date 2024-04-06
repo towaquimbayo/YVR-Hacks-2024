@@ -8,9 +8,9 @@ export default function Dashboard() {
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) navigate("/login");
-  // }, [isLoggedIn, navigate]);
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/login");
+  }, [isLoggedIn, navigate]);
 
   return (
     <Layout title="Dashboard" isLandingPage>
