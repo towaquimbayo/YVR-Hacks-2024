@@ -1,7 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearSession } from "../redux/actions/UserAction";
 import { LayoutGrid, ClipboardList, Monitor, LogOut } from 'lucide-react';
 
 export default function SideNav() {
+  const dispatch = useDispatch();
+
   return (
     <div className="w-[220px] pr-3 py-3 flex flex-col justify-between">
       <div>
@@ -35,12 +39,13 @@ export default function SideNav() {
       </div>
 
       <div className="pl-3">
-        <NavLink
+        <Link
+          onClick={async () => dispatch(clearSession())}
           to="/login"
           className="text-md flex items-center gap-3"
         >
           <LogOut size={18} /> Logout
-        </NavLink>
+        </Link>
       </div>
     </div>
   );
