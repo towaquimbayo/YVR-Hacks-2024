@@ -13,7 +13,7 @@ export default function LiveMonitor() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <Layout title="LiveMonitor">
+    <Layout title="Live Monitor">
       <h1>Live Monitor</h1>
     </Layout>
   );

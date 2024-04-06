@@ -7,8 +7,8 @@
     "priority": "High",
     "timestamp": "2024-04-06T10:30:00",
     "location": "Terminal A",
-    "video-clip": "https://example.com/baggage_conveyor_jam.mp4",
-    "is-resolved": false
+    "video": "https://example.com/baggage_conveyor_jam.mp4",
+    "resolved": false
   },
   {
     "id": 1,
@@ -18,8 +18,8 @@
     "priority": "Medium",
     "timestamp": "2024-04-06T11:15:00",
     "location": "Gate B12",
-    "video-clip": "https://example.com/restroom_odor.mp4",
-    "is-resolved": false
+    "video": "https://example.com/restroom_odor.mp4",
+    "resolved": true
   },
   {
     "id": 2,
@@ -29,8 +29,8 @@
     "priority": "High",
     "timestamp": "2024-04-06T12:00:00",
     "location": "Terminal C",
-    "video-clip": "https://example.com/security_congestion.mp4",
-    "is-resolved": false
+    "video": "https://example.com/security_congestion.mp4",
+    "resolved": false
   },
   {
     "id": 3,
@@ -40,8 +40,8 @@
     "priority": "Medium",
     "timestamp": "2024-04-06T13:20:00",
     "location": "Food Court",
-    "video-clip": "https://example.com/food_spill.mp4",
-    "is-resolved": false
+    "video": "https://example.com/food_spill.mp4",
+    "resolved": false
   },
   {
     "id": 4,
@@ -51,8 +51,8 @@
     "priority": "High",
     "timestamp": "2024-04-06T14:45:00",
     "location": "Terminal D",
-    "video-clip": "https://example.com/broken_escalator.mp4",
-    "is-resolved": false
+    "video": "https://example.com/broken_escalator.mp4",
+    "resolved": false
   },
   {
     "id": 5,
@@ -62,8 +62,8 @@
     "priority": "Medium",
     "timestamp": "2024-04-06T15:10:00",
     "location": "Terminal E",
-    "video-clip": "https://example.com/announcement_failure.mp4",
-    "is-resolved": false
+    "video": "https://example.com/announcement_failure.mp4",
+    "resolved": false
   },
   {
     "id": 6,
@@ -73,8 +73,8 @@
     "priority": "High",
     "timestamp": "2024-04-06T16:30:00",
     "location": "Baggage Claim",
-    "video-clip": "https://example.com/lost_luggage.mp4",
-    "is-resolved": false
+    "video": "https://example.com/lost_luggage.mp4",
+    "resolved": false
   },
   {
     "id": 7,
@@ -84,8 +84,8 @@
     "priority": "High",
     "timestamp": "2024-04-06T17:05:00",
     "location": "Runway",
-    "video-clip": "https://example.com/drone_activity.mp4",
-    "is-resolved": false
+    "video": "https://example.com/drone_activity.mp4",
+    "resolved": false
   },
   {
     "id": 8,
@@ -95,8 +95,8 @@
     "priority": "Low",
     "timestamp": "2024-04-06T18:20:00",
     "location": "Gate F5",
-    "video-clip": "https://example.com/broken_vending_machine.mp4",
-    "is-resolved": false
+    "video": "https://example.com/broken_vending_machine.mp4",
+    "resolved": false
   },
   {
     "id": 9,
@@ -106,8 +106,8 @@
     "priority": "High",
     "timestamp": "2024-04-06T19:40:00",
     "location": "Boarding Gate of Flight 123",
-    "video-clip": "https://example.com/passenger_altercation.mp4",
-    "is-resolved": false
+    "video": "https://example.com/passenger_altercation.mp4",
+    "resolved": false
   },
   {
     "id": 10,
@@ -117,8 +117,8 @@
     "priority": "Medium",
     "timestamp": "2024-04-07T08:00:00",
     "location": "Terminal B",
-    "video-clip": "https://example.com/gate_change_confusion.mp4",
-    "is-resolved": false
+    "video": "https://example.com/gate_change_confusion.mp4",
+    "resolved": false
   },
   {
     "id": 11,
@@ -128,8 +128,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T09:30:00",
     "location": "Baggage Claim",
-    "video-clip": "https://example.com/medical_assistance.mp4",
-    "is-resolved": false
+    "video": "https://example.com/medical_assistance.mp4",
+    "resolved": false
   },
   {
     "id": 12,
@@ -139,8 +139,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T11:15:00",
     "location": "Tarmac",
-    "video-clip": "https://example.com/fuel_leakage.mp4",
-    "is-resolved": false
+    "video": "https://example.com/fuel_leakage.mp4",
+    "resolved": false
   },
   {
     "id": 13,
@@ -150,8 +150,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T12:45:00",
     "location": "Terminal F",
-    "video-clip": "https://example.com/power_outage.mp4",
-    "is-resolved": false
+    "video": "https://example.com/power_outage.mp4",
+    "resolved": false
   },
   {
     "id": 14,
@@ -161,8 +161,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T14:20:00",
     "location": "Check-in Counters",
-    "video-clip": "https://example.com/suspicious_package.mp4",
-    "is-resolved": false
+    "video": "https://example.com/suspicious_package.mp4",
+    "resolved": false
   },
   {
     "id": 15,
@@ -172,8 +172,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T15:40:00",
     "location": "Runway",
-    "video-clip": "https://example.com/bird_strike.mp4",
-    "is-resolved": false
+    "video": "https://example.com/bird_strike.mp4",
+    "resolved": false
   },
   {
     "id": 16,
@@ -183,8 +183,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T17:00:00",
     "location": "Gate C7",
-    "video-clip": "https://example.com/water_pipe_burst.mp4",
-    "is-resolved": false
+    "video": "https://example.com/water_pipe_burst.mp4",
+    "resolved": false
   },
   {
     "id": 17,
@@ -194,8 +194,8 @@
     "priority": "High",
     "timestamp": "2024-04-07T18:30:00",
     "location": "Concourse",
-    "video-clip": "https://example.com/lost_child.mp4",
-    "is-resolved": false
+    "video": "https://example.com/lost_child.mp4",
+    "resolved": false
   },
   {
     "id": 18,
@@ -205,8 +205,8 @@
     "priority": "Medium",
     "timestamp": "2024-04-07T19:45:00",
     "location": "Terminal D",
-    "video-clip": "https://example.com/ac_malfunction.mp4",
-    "is-resolved": false
+    "video": "https://example.com/ac_malfunction.mp4",
+    "resolved": false
   },
   {
     "id": 19,
@@ -216,7 +216,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-07T20:55:00",
     "location": "Departure Gates",
-    "video-clip": "https://example.com/luggage_cart_collision.mp4",
-    "is-resolved": false
+    "video": "https://example.com/luggage_cart_collision.mp4",
+    "resolved": false
   }
 ]
