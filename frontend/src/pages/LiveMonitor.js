@@ -1,7 +1,9 @@
+import Layout from "../components/Layout";
+
 export default function LiveMonitor() {
   return (
-    <div className="text-3xl text-center mt-10">
-      <h1>Live Monitor</h1>
-    </div>
+    <Layout title="LiveMonitor">
+      <h1>LiveMonitor</h1>
+    </Layout>
   );
 }

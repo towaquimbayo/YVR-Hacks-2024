@@ -1,7 +1,9 @@
+import Layout from "../components/Layout";
+
 export default function Reports() {
   return (
-    <div className="text-3xl text-center mt-10">
+    <Layout title="Reports">
       <h1>Reports</h1>
-    </div>
+    </Layout>
   );
 }

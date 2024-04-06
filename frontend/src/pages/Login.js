@@ -1,7 +1,9 @@
+import Layout from "../components/Layout";
+
 export default function Login() {
   return (
-    <div className="text-3xl text-center mt-10">
+    <Layout title="Login">
       <h1>Login</h1>
-    </div>
+    </Layout>
   );
 }

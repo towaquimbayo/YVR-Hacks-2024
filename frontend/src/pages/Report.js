@@ -1,7 +1,9 @@
-export default function Issue() {
+import Layout from "../components/Layout";
+
+export default function Report() {
   return (
-    <div className="text-3xl text-center mt-10">
-      <h1>Issue</h1>
-    </div>
+    <Layout title="Report">
+      <h1>Report</h1>
+    </Layout>
   );
 }
