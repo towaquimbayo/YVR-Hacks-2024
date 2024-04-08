@@ -8,9 +8,10 @@ class CameraStream:
         else:
             self.cap = cv2.VideoCapture(0)
 
-
-
     def get_frame(self):
         success, frame = self.cap.read()
+        return success, frame
 
-
+    @property
+    def is_cap_opened(self):
+        return self.cap.isOpened()
