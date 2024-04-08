@@ -20,5 +20,5 @@ class YVRModel:
 
     def get_tagged_image(self, image_to_tag):
         tracks = self.model.track(image_to_tag, persist=True, show=False, classes=[0, 63])
-        image = self.object_counter.start_counting(image_to_tag, tracks)
+        image = self.counter.start_counting(image_to_tag, tracks)
         return image
