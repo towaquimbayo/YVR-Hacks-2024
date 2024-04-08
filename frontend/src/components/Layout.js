@@ -17,10 +17,11 @@ export default function Layout({ title, isLandingPage = false, children }) {
           {isLandingPage ? "Crow's Nest" : `${title} | Crow's Nest`}
         </title>
       </Helmet>
-      <div className="flex h-screen bg-gray-200 p-3">
+      <div className="flex min-h-screen bg-gray-200 p-3">
         {isLoggedIn && <SideNav />}
-        {/* <div className="bg-gray-100 w-full rounded-3xl p-3"> */}
-        <div className={isLoggedIn ? "bg-gray-100 w-full rounded-3xl p-3" : "bg-gray-100 w-full"}>
+        <div
+          className={`bg-gray-100 w-full ${isLoggedIn ? "rounded-3xl p-12" : ""}`}
+        >
           {children}
         </div>
       </div>
