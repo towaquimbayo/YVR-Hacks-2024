@@ -36,6 +36,12 @@ def regular_stream():
 
 @app.route('/regular')
 def regular():
+    """
+    Return untagged camera stream.
+
+    This is in
+    """
+    print("YOU REQUESTING THE UNTAGGED CAMERA STREAM FROM FLASK, IT MAY THROTTLE")
     return Response(regular_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
