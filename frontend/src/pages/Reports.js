@@ -43,19 +43,19 @@ export default function Reports() {
     const getColor = (priority) => {
       switch (priority) {
         case "Low":
-          return "#3dce79";
+          return "bg-[#3dce79]";
         case "Medium":
-          return "#f69952";
+          return "bg-[#f69952]";
         case "High":
-          return "#ee4c4c";
+          return "bg-[#ee4c4c]";
         default:
-          return "#3dce79";
+          return "bg-[#3dce79]";
       }
     };
     const priorityColor = getColor(priority);
     return (
       <div
-        className={`flex items-center min-w-20 text-center justify-center bg-[${priorityColor}] text-white px-2 py-1.5 rounded-xl text-sm font-normal h-fit`}
+        className={`flex items-center min-w-20 text-center justify-center ${priorityColor} text-white px-2 py-1.5 rounded-xl text-sm font-normal h-fit`}
       >
         {priority}
       </div>
