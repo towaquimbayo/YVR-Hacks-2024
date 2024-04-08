@@ -40,14 +40,22 @@ export default function Reports() {
   }, []);
 
   function ReportPriority({ priority }) {
-    const colors = {
-      Low: "#3dce79",
-      Medium: "#f69952",
-      High: "#ee4c4c",
+    const getColor = (priority) => {
+      switch (priority) {
+        case "Low":
+          return "#3dce79";
+        case "Medium":
+          return "#f69952";
+        case "High":
+          return "#ee4c4c";
+        default:
+          return "#3dce79";
+      }
     };
+    const priorityColor = getColor(priority);
     return (
       <div
-        className={`flex items-center min-w-20 text-center justify-center bg-[${colors[priority]}] text-white px-2 py-1.5 rounded-xl text-sm font-normal h-fit`}
+        className={`flex items-center min-w-20 text-center justify-center bg-[${priorityColor}] text-white px-2 py-1.5 rounded-xl text-sm font-normal h-fit`}
       >
         {priority}
       </div>
