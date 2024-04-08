@@ -11,6 +11,7 @@ import {
 import { Circle, CircleCheck } from "lucide-react";
 import Layout from "../components/Layout";
 import mockReports from "../content/mockReports.json";
+import { getDateTime } from "../utils/Helpers";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -38,26 +39,23 @@ export default function Reports() {
     setReports(mockReports);
   }, []);
 
-  function getDateTime(date) {
-    return new Date(date).toLocaleDateString("en-US", {
-      timeZone: "UTC",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
-  }
-
   function ReportPriority({ priority }) {
-    const colors = {
-      Low: "#3dce79",
-      Medium: "#f69952",
-      High: "#ee4c4c",
+    const getColor = (priority) => {
+      switch (priority) {
+        case "Low":
+          return "bg-[#3dce79]";
+        case "Medium":
+          return "bg-[#f69952]";
+        case "High":
+          return "bg-[#ee4c4c]";
+        default:
+          return "bg-[#3dce79]";
+      }
     };
+    const priorityColor = getColor(priority);
     return (
       <div
-        className={`flex items-center min-w-20 text-center justify-center bg-[${colors[priority]}] text-white px-2 py-1.5 rounded-xl text-sm font-normal h-fit`}
+        className={`flex items-center min-w-20 text-center justify-center ${priorityColor} text-white px-2 py-1.5 rounded-xl text-sm font-normal h-fit`}
       >
         {priority}
       </div>
@@ -71,10 +69,7 @@ export default function Reports() {
         title="View Report"
         onClick={() => navigate(`/report?id=${report.id}`)}
       >
-        <div
-          className="w-fit p-1 cursor-pointer"
-          title={report.resolved ? "Mark as Resolved" : "Mark as Unresolved"}
-        >
+        <div className="w-fit p-1 cursor-pointer">
           {report.resolved ? (
             <CircleCheck size={24} className="text-[#63d873]" />
           ) : (
