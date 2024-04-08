@@ -1,21 +1,21 @@
 from flask import Flask, Response
 import cv2
-
-from counting import TaggedImage
+from AI.yrv_model import YVRModel
+from Camera.camera import CameraStream
 
 app = Flask(__name__)
 
-tagger = TaggedImage()
-camera = cv2.VideoCapture(0)
+model = YVRModel()
+camera = CameraStream()
 
 
 def generate_frames():
     while True:
-        success, frame = camera.read()
+        success, frame = camera.get_frame()
         if not success:
             break
         else:
-            tagged_image = tagger.get_tagged_frame(frame)
+            tagged_image = model.get_tagged_image(frame)
             ret, buffer = cv2.imencode('.jpg', tagged_image)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
@@ -24,7 +24,7 @@ def generate_frames():
 
 def regular_stream():
     while True:
-        success, frame = camera.read()
+        success, frame = camera.get_frame()
         if not success:
             break
         else:

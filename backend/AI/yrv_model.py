@@ -12,7 +12,7 @@ class YVRModel:
         self._init()
 
     def _init(self):
-        self.object_counter.set_args(view_img=True,
+        self.counter.set_args(view_img=True,
                                      reg_pts=region_points,
                                      classes_names=self.model.names,
                                      draw_tracks=True,
