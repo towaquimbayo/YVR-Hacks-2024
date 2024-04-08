@@ -11,6 +11,7 @@ import {
 import { Circle, CircleCheck } from "lucide-react";
 import Layout from "../components/Layout";
 import mockReports from "../content/mockReports.json";
+import { getDateTime } from "../utils/Helpers";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -38,17 +39,6 @@ export default function Reports() {
     setReports(mockReports);
   }, []);
 
-  function getDateTime(date) {
-    return new Date(date).toLocaleDateString("en-US", {
-      timeZone: "UTC",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
-  }
-
   function ReportPriority({ priority }) {
     const colors = {
       Low: "#3dce79",
@@ -71,10 +61,7 @@ export default function Reports() {
         title="View Report"
         onClick={() => navigate(`/report?id=${report.id}`)}
       >
-        <div
-          className="w-fit p-1 cursor-pointer"
-          title={report.resolved ? "Mark as Resolved" : "Mark as Unresolved"}
-        >
+        <div className="w-fit p-1 cursor-pointer">
           {report.resolved ? (
             <CircleCheck size={24} className="text-[#63d873]" />
           ) : (
