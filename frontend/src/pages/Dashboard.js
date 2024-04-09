@@ -13,8 +13,14 @@ export default function Dashboard() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <Layout title="Dashboard" isLandingPage>
-      <h1>Dashboard</h1>
+    <Layout
+      title="Dashboard"
+      isLandingPage
+      heading={<h1 className="text-3xl font-semibold">Dashboard</h1>}
+    >
+      <p className="text-lg">
+        Welcome to Crow's Nest! This is a dashboard page.
+      </p>
     </Layout>
   );
 }

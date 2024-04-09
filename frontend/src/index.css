@@ -7,6 +7,15 @@
   font-family: "Inter", sans-serif;
 }
 
-li:has(.active) {
-  @apply bg-gray-300;
+li {
+  @apply transition-all;
+  @apply duration-300;
+  @apply ease-in-out;
+  @apply cursor-pointer;
+}
+
+li:has(.active),
+li:hover {
+  @apply bg-primary;
+  @apply text-white;
 }

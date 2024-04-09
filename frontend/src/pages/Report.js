@@ -68,37 +68,47 @@ export default function Report() {
     );
   }
   return (
-    <Layout title="Report">
-      <div
-        className="flex gap-2 items-center cursor-pointer mb-2"
-        onClick={() => navigate(-1)}
-        title="Return back"
-      >
-        <MoveLeft size={16} />
-        <span className="text-black">Return Back</span>
-      </div>
-
-      {fetching ? (
-        <h1 className="text-3xl font-semibold animate-pulse">
-          Fetching report...
-        </h1>
-      ) : (
+    <Layout
+      title="Report"
+      heading={
+        <div className="flex items-center gap-4">
+          <div className="flex flex-col">
+            <div
+              className="flex gap-2 items-center cursor-pointer mb-2"
+              onClick={() => navigate(-1)}
+              title="Return back"
+            >
+              <MoveLeft size={16} />
+              <span className="text-black">Return Back</span>
+            </div>
+            {fetching ? (
+              <h1 className="text-3xl font-semibold animate-pulse">
+                Fetching report...
+              </h1>
+            ) : (
+              <h1 className="text-3xl font-semibold">{report.title}</h1>
+            )}
+          </div>
+        </div>
+      }
+    >
+      {!fetching && (
         <div className="flex flex-col">
           <div className="flex items-center justify-between gap-4 mb-8 w-full">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-4">
-                <span className="text-md text-primary">{report.category}</span>
+                <span className="text-md text-primary font-medium">
+                  {report.category}
+                </span>
                 <ReportPriority priority={report.priority} />
               </div>
-              <h1 className="text-3xl font-semibold">{report.title}</h1>
             </div>
             <Button
               title={
                 report.resolved ? "Mark as Unresolved" : "Mark as Resolved"
               }
               onClick={handleReportStatus}
-              text={report.resolved ? "Resolved" : "Unresolved"}
-              outline
+              text={report.resolved ? "Mark as Unresolved" : "Mark as Resolved"}
             />
           </div>
           <div className="flex gap-2 items-center mb-4">

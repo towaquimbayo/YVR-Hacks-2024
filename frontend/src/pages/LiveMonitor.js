@@ -13,8 +13,13 @@ export default function LiveMonitor() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <Layout title="Live Monitor">
-      <h1>Live Monitor</h1>
+    <Layout
+      title="Live Monitor"
+      heading={<h1 className="text-3xl font-semibold">Live Monitor</h1>}
+    >
+      <p className="text-lg">
+        Welcome to Crow's Nest! This is a live monitor page.
+      </p>
     </Layout>
   );
 }

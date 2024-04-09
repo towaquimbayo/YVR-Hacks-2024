@@ -106,13 +106,17 @@ export default function Reports() {
   }
 
   return (
-    <Layout title="Reports">
-      <div className="flex items-center mb-4 gap-4">
-        <h1 className="text-3xl font-semibold">Reports</h1>
-        <div className="bg-primary text-white px-5 py-0.5 rounded-xl text-lg font-medium">
-          {filteredReports.length}
+    <Layout
+      title="Reports"
+      heading={
+        <div className="flex items-center gap-4">
+          <h1 className="text-3xl font-semibold">Reports</h1>
+          <div className="bg-primary text-white px-5 py-0.5 rounded-xl text-lg font-medium">
+            {filteredReports.length}
+          </div>
         </div>
-      </div>
+      }
+    >
       <Tabs value={selectedTab}>
         <TabsHeader
           className="w-fit bg-transparent gap-2"
