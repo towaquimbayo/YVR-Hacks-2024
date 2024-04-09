@@ -34,17 +34,4 @@ To install RavenEye, follow these steps:
 
 Once RavenEye is installed and configured, you can use it to monitor airport maintenance, detect spills, and track passenger volumes. Here's a basic usage example:
 
-```python
-from RavenEye import RavenEye
 
-# Initialize RavenEye
-raven_eye = RavenEye()
-
-# Start monitoring maintenance
-raven_eye.monitor_maintenance()
-
-# Start spill detection
-raven_eye.detect_spills()
-
-# Track passenger volumes
-raven_eye.track_passenger_volumes()
