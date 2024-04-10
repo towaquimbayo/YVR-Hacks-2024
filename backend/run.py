@@ -1,7 +1,8 @@
 import base64
 import sqlite3
+import time
 from datetime import datetime
-
+from flask_cors import CORS
 import numpy as np
 from flask import Flask, Response, jsonify
 import cv2
@@ -10,6 +11,7 @@ from Camera.camera import CameraStream
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+CORS(app)  # This will enable CORS for all routes and methods
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///yvr_hack.db"
 
 db = SQLAlchemy(app)
@@ -36,6 +38,7 @@ class Incident(db.Model):
 
     def save_image(self, cv_image):
         # Convert the OpenCV image to a byte array
+        cv2.imwrite(time.time(), cv_image)
         _, image_buffer = cv2.imencode('.jpg', cv_image)
         image_bytes = image_buffer.tobytes()
 
@@ -66,7 +69,8 @@ class DatabaseOperation:
     def add_incident(self, image, object, time):
         with app.app_context():
             try:
-                incident = Incident(image=image, object=object, time_unattended=time)
+                incident = Incident(object=object, time_unattended=time)
+                incident.save_image(image)
                 self.db.session.add(incident)
                 self.db.session.commit()
                 print("Incident added successfully.")
