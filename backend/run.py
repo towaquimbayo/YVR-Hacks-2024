@@ -1,16 +1,83 @@
+import base64
 import sqlite3
+from datetime import datetime
 
+import numpy as np
 from flask import Flask, Response, jsonify
 import cv2
 from AI.yrv_model import YVRModel
 from Camera.camera import CameraStream
-from db import Db
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = Db()
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///yvr_hack.db"
 
-model = YVRModel(db)
-camera = CameraStream()
+db = SQLAlchemy(app)
+
+
+class Counts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.Text, default=datetime.utcnow)
+    in_count = db.Column(db.Integer, nullable=False)
+    out_count = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f"Counts(id={self.id}, timestamp={self.timestamp}, in_count={self.in_count}, out_count={self.out_count})"
+
+
+class Incident(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.BLOB, nullable=False)
+    object = db.Column(db.Text, nullable=False)
+    time_unattended = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Incident(id={self.id}, object={self.object}, time_unattended={self.time_unattended})"
+
+    def save_image(self, cv_image):
+        # Convert the OpenCV image to a byte array
+        _, image_buffer = cv2.imencode('.jpg', cv_image)
+        image_bytes = image_buffer.tobytes()
+
+        # Store the byte array in the database
+        self.image = image_bytes
+
+    def get_image(self):
+        # Convert the byte array back to an OpenCV image
+        image_array = np.frombuffer(self.image, dtype=np.uint8)
+        cv_image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        return cv_image
+
+
+class DatabaseOperation:
+    def __init__(self, dab):
+        self.db = dab
+
+    def add_count(self, count_in, count_out):
+        with app.app_context():
+            try:
+                counts_entry = Counts(in_count=count_in, out_count=count_out)
+                self.db.session.add(counts_entry)
+                self.db.session.commit()
+                print("Count added successfully.")
+            except Exception as e:
+                print("Error adding count:", e)
+
+    def add_incident(self, image, object, time):
+        with app.app_context():
+            try:
+                incident = Incident(image=image, object=object, time_unattended=time)
+                self.db.session.add(incident)
+                self.db.session.commit()
+                print("Incident added successfully.")
+            except Exception as e:
+                print("Error adding incident:", e)
+
+
+dbo = DatabaseOperation(db)
+
+model = YVRModel(dbo)
+camera = CameraStream(stream_link=r"rtsp://service:oRATEAM1!@192.168.1.78/?h26x=4&inst=2")
 
 
 def generate_frames():
@@ -61,36 +128,50 @@ def get_db_connection():
     return conn
 
 
-@app.route('/get_timestamps')
+@app.route('/get_counts')
 def get_timestamps():
-    # Create a new database connection
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
     # Retrieve all data from the counts table
-    cursor.execute("SELECT * FROM counts")
-    rows = cursor.fetchall()
+    counts = Counts.query.all()
 
-    # Close the database connection
-    conn.close()
-
-    # Convert the rows to a list of dictionaries
-    counts = []
-    for row in rows:
-        counts.append({
-            'timestamp': row['timestamp'],
-            'in_count': row['in_count'],
-            'out_count': row['out_count']
+    # Convert the counts objects to a list of dictionaries
+    counts_list = []
+    for count in counts:
+        counts_list.append({
+            'id': count.id,
+            'timestamp': count.timestamp,
+            'in_count': count.in_count,
+            'out_count': count.out_count
         })
 
     # Return the counts as JSON
-    return jsonify(counts)
+    return jsonify(counts_list)
+
+
+@app.route('/get_incidents')
+def get_incidents():
+    incidents = Incident.query.all()
+
+    # Convert the incidents to a list of dictionaries
+    incidents_list = []
+    for incident in incidents:
+        incidents_list.append({
+            'id': incident.id,
+            'image': base64.b64encode(incident.image).decode('utf-8'),  # Convert the byte object to base64 string
+            'object': incident.object,
+            'time_unattended': incident.time_unattended.strftime('%Y-%m-%d %H:%M:%S')
+        })
+
+    # Return the incidents as JSON
+    return jsonify(incidents_list)
 
 
 @app.route('/')
 def home():
     return "<h1>Home</h1>"
 
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
