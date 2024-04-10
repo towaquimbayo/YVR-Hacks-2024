@@ -8,8 +8,10 @@ cycler==0.12.1
 Cython==3.0.10
 filelock==3.13.3
 Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
 fonttools==4.51.0
 fsspec==2024.3.1
+greenlet==3.0.3
 idna==3.6
 itsdangerous==2.1.2
 Jinja2==3.1.3
@@ -18,6 +20,8 @@ lapx==0.5.7
 MarkupSafe==2.1.5
 matplotlib==3.8.4
 mpmath==1.3.0
+mysql==0.0.3
+mysqlclient==2.2.4
 networkx==3.3
 numpy==1.26.4
 opencv-python==4.9.0.80
@@ -35,6 +39,7 @@ scipy==1.13.0
 seaborn==0.13.2
 shapely==2.0.3
 six==1.16.0
+SQLAlchemy==2.0.29
 sympy==1.12
 thop==0.1.1.post2209072238
 torch==2.2.2
