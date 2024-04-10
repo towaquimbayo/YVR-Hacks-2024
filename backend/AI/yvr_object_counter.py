@@ -1,6 +1,7 @@
 # Ultralytics YOLO 🚀, AGPL-3.0 license
-
+import time
 from collections import defaultdict
+from datetime import datetime
 
 import cv2
 
@@ -15,9 +16,11 @@ from shapely.geometry import LineString, Point, Polygon
 class YVRObjectCounter:
     """A class to manage the counting of objects in a real-time video stream based on their tracks."""
 
-    def __init__(self):
+    def __init__(self, db):
         """Initializes the Counter with default values for various tracking and counting parameters."""
 
+        # databse
+        self.db = db
         # Mouse events
         self.is_drawing = False
         self.selected_point = None
@@ -59,6 +62,12 @@ class YVRObjectCounter:
 
         # Check if environment support imshow
         self.env_check = check_imshow(warn=True)
+
+        # list of object need to track stationary
+        self.stationary_objects = {
+            0: [],
+            28: []
+        }
 
     def set_args(
             self,
@@ -176,8 +185,11 @@ class YVRObjectCounter:
 
             # Extract tracks
             for box, track_id, cls in zip(boxes, track_ids, clss):
+                print("track_id", track_id)
+                print("cls", self.names[cls])
                 # Draw bounding box
-                self.annotator.box_label(box, label=f"{self.names[cls]}#{track_id}", color=colors(int(track_id), True))
+                self.annotator.box_label(box, label=f"{self.names[cls]}#{track_id}",
+                                         color=colors(int(track_id), True))
 
                 # Store class info
                 if self.names[cls] not in self.class_wise_count:
@@ -188,48 +200,106 @@ class YVRObjectCounter:
                 # Draw Tracks
                 track_line = self.track_history[track_id]
                 track_line.append((float((box[0] + box[2]) / 2), float((box[1] + box[3]) / 2)))
-                if len(track_line) > 30:
-                    track_line.pop(0)
+                print(cls, "Cls")
+                if cls == 28:
+                    person_case_list = self.stationary_objects.get(cls, [])
+                    current_track_id = [person for person in person_case_list if person["track_id"] == track_id]
+                    if current_track_id:
+                        if current_track_id[0]["prev_point"] == (int(track_line[-1][0]), int(track_line[-1][0])):
+                            if time.time() - float(current_track_id[0]["time"]) >= 10:
+                                print("adding suitcase")
+                                self.db.add_incident(self.im0, "suitcase", datetime.utcnow())
+                                # Correctly using filter to remove an item, converting filter object to a list
+                                new_list = list(filter(lambda person: person["track_id"] != track_id, person_case_list))
+                                self.stationary_objects[cls] = new_list
+                        else:
+                            # Properly updating 'prev_point' for the matching person
+                            for person in person_case_list:
+                                if person["track_id"] == track_id:
+                                    person["prev_point"] = (int(track_line[-1][0]), int(track_line[-1][0]))
+                                    # Assuming you want to update the time as well
+                                    person["time"] = time.time()
+                            # No need to assign it back to self.stationary_objects["person"]
+                            # because we modified the list in place
+                    else:
+                        person_object = {
+                            "track_id": track_id,
+                            "prev_point": (int(track_line[-1][0]), int(track_line[-1][0])),
+                            "time": time.time()
+                        }
+                        person_case_list.append(person_object)
+                        self.stationary_objects["person"] = person_case_list
+                if cls == -1:
+                    person_case_list = self.stationary_objects.get("person", [])
+                    current_track_id = [person for person in person_case_list if person["track_id"] == track_id]
+
+                    if current_track_id:
+                        if current_track_id[0]["prev_point"] == track_line[-1]:
+                            if time.time() - float(current_track_id[0]["time"]) >= 10:
+                                print(track_id, "is the stationary")
+                                # Correctly using filter to remove an item, converting filter object to a list
+                                new_list = list(filter(lambda person: person["track_id"] != track_id, person_case_list))
+                                self.stationary_objects["person"] = new_list
+                        else:
+                            # Properly updating 'prev_point' for the matching person
+                            for person in person_case_list:
+                                if person["track_id"] == track_id:
+                                    person["prev_point"] = track_line[-1]
+                                    # Assuming you want to update the time as well
+                                    person["time"] = time.time()
+                            # No need to assign it back to self.stationary_objects["person"]
+                            # because we modified the list in place
+                    else:
+                        person_object = {
+                            "track_id": track_id,
+                            "prev_point": track_line[-1],
+                            "time": time.time()
+                        }
+                        person_case_list.append(person_object)
+                        self.stationary_objects["person"] = person_case_list  # Correctly assign the updated list
+            if len(track_line) > 30:
+                track_line.pop(0)
 
                 # Draw track trails
-                if self.draw_tracks:
-                    self.annotator.draw_centroid_and_tracks(
-                        track_line,
-                        color=self.track_color if self.track_color else colors(int(track_id), True),
-                        track_thickness=self.track_thickness,
-                    )
+            if self.draw_tracks:
+                self.annotator.draw_centroid_and_tracks(
+                    track_line,
+                    color=self.track_color if self.track_color else colors(int(track_id), True),
+                    track_thickness=self.track_thickness,
+                )
 
-                prev_position = self.track_history[track_id][-2] if len(self.track_history[track_id]) > 1 else None
+            prev_position = self.track_history[track_id][-2] if len(self.track_history[track_id]) > 1 else None
 
-                # Count objects in any polygon
-                if len(self.reg_pts) >= 3:
-                    is_inside = self.counting_region.contains(Point(track_line[-1]))
+            # Count objects in any polygon
+            if len(self.reg_pts) >= 3:
+                is_inside = self.counting_region.contains(Point(track_line[-1]))
 
-                    if prev_position is not None and is_inside and track_id not in self.count_ids:
+                if prev_position is not None and is_inside and track_id not in self.count_ids:
+                    self.count_ids.append(track_id)
+
+                    if (box[0] - prev_position[0]) * (self.counting_region.centroid.x - prev_position[0]) > 0:
+                        self.in_counts += 1
+                        self.class_wise_count[self.names[cls]]["in"] += 1
+                    else:
+                        self.out_counts += 1
+                        self.class_wise_count[self.names[cls]]["out"] += 1
+
+            # Count objects using line
+            elif len(self.reg_pts) == 2:
+                if prev_position is not None and track_id not in self.count_ids:
+                    distance = Point(track_line[-1]).distance(self.counting_region)
+                    if distance < self.line_dist_thresh and track_id not in self.count_ids:
                         self.count_ids.append(track_id)
 
-                        if (box[0] - prev_position[0]) * (self.counting_region.centroid.x - prev_position[0]) > 0:
+                        if (box[0] - prev_position[0]) * (
+                                self.counting_region.centroid.x - prev_position[0]) > 0:
                             self.in_counts += 1
-                            self.class_wise_count[self.names[cls]]["in"] += 1
+                            self.class_wise_count[self.names[cls]]["in"] += 2
                         else:
                             self.out_counts += 1
                             self.class_wise_count[self.names[cls]]["out"] += 1
 
-                # Count objects using line
-                elif len(self.reg_pts) == 2:
-                    if prev_position is not None and track_id not in self.count_ids:
-                        distance = Point(track_line[-1]).distance(self.counting_region)
-                        if distance < self.line_dist_thresh and track_id not in self.count_ids:
-                            self.count_ids.append(track_id)
-
-                            if (box[0] - prev_position[0]) * (self.counting_region.centroid.x - prev_position[0]) > 0:
-                                self.in_counts += 1
-                                self.class_wise_count[self.names[cls]]["in"] += 2
-                            else:
-                                self.out_counts += 1
-                                self.class_wise_count[self.names[cls]]["out"] += 1
-
-        label = "Ultralytics Analytics \t"
+        label = "YVR Analytics \t"
 
         for key, value in self.class_wise_count.items():
             if value["in"] != 0 or value["out"] != 0:
@@ -278,7 +348,8 @@ class YVRObjectCounter:
         self.extract_and_process_tracks(tracks)  # draw region even if no objects
 
         if self.view_img:
-            self.display_frames()
+            pass
+            # self.display_frames()
         return self.im0
 
 
