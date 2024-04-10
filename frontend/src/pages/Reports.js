@@ -34,7 +34,6 @@ export default function Reports() {
     });
   }, [reports, selectedTab]);
 
-  // Mock fetch reports
   useEffect(() => {
     async function fetchReports() {
       const response = await fetch(
