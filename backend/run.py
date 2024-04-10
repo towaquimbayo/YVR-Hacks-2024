@@ -32,6 +32,9 @@ class Incident(db.Model):
     image = db.Column(db.BLOB, nullable=False)
     object = db.Column(db.Text, nullable=False)
     time_unattended = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    location = db.Column(db.Text, nullable=True)  # Assuming location can be nullable
+    priority = db.Column(db.Integer, nullable=False, default=0)  # Assuming priority is an integer
+    is_resolved = db.Column(db.Boolean, nullable=False, default=False)  # Assuming is_resolved is a boolean
 
     def __repr__(self):
         return f"Incident(id={self.id}, object={self.object}, time_unattended={self.time_unattended})"
@@ -66,7 +69,7 @@ class DatabaseOperation:
             except Exception as e:
                 print("Error adding count:", e)
 
-    def add_incident(self, image, object, time):
+    def add_incident(self, image, object, time, location="camera1", priority=0, is_resolved=False):
         with app.app_context():
             try:
                 incident = Incident(object=object, time_unattended=time)
