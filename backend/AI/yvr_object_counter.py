@@ -177,7 +177,6 @@ class YVRObjectCounter:
 
         # Draw region or line
         self.annotator.draw_region(reg_pts=self.reg_pts, color=self.region_color, thickness=self.region_thickness)
-
         if tracks[0].boxes.id is not None:
             boxes = tracks[0].boxes.xyxy.cpu()
             clss = tracks[0].boxes.cls.cpu().tolist()
@@ -185,8 +184,6 @@ class YVRObjectCounter:
 
             # Extract tracks
             for box, track_id, cls in zip(boxes, track_ids, clss):
-                print("track_id", track_id)
-                print("cls", self.names[cls])
                 # Draw bounding box
                 self.annotator.box_label(box, label=f"{self.names[cls]}#{track_id}",
                                          color=colors(int(track_id), True))
@@ -202,12 +199,14 @@ class YVRObjectCounter:
                 track_line.append((float((box[0] + box[2]) / 2), float((box[1] + box[3]) / 2)))
                 print(cls, "Cls")
                 if cls == 28:
-                    person_case_list = self.stationary_objects.get(cls, [])
-                    current_track_id = [person for person in person_case_list if person["track_id"] == track_id]
-                    print(person_case_list)
+                    suit_case_list = self.stationary_objects.get(cls, [])
+                    current_track_id = [person for person in suit_case_list if person["track_id"] == track_id]
                     if current_track_id:
+
                         if current_track_id[0]["prev_point"] == (int(track_line[-1][0]), int(track_line[-1][1])):
-                            if time.time() - float(current_track_id[0]["time"]) >= 10 and not current_track_id[0][
+                            print(time.time() - float(current_track_id[0]["time"]))
+                            print(current_track_id[0]["reported"])
+                            if time.time() - float(current_track_id[0]["time"]) >= 5 and not current_track_id[0][
                                 "reported"]:
                                 print("adding suitcase")
                                 self.db.add_incident(self.im0, "suitcase", datetime.utcnow())
@@ -215,7 +214,7 @@ class YVRObjectCounter:
                                 filtered_list = []
 
                                 # Loop through each person in the person_case_list
-                                for person in person_case_list:
+                                for person in suit_case_list:
                                     # Check if the person's track_id is not equal to track_id
                                     if person["track_id"] != track_id:
                                         # If so, add the person to the filtered_list
@@ -227,10 +226,9 @@ class YVRObjectCounter:
                                 self.stationary_objects[cls] = filtered_list
 
                                 # Print the updated stationary_objects dictionary for verification
-                                print(self.stationary_objects, "after the adding of photo")
                         else:
                             # Properly updating 'prev_point' for the matching person
-                            for person in person_case_list:
+                            for person in suit_case_list:
                                 if person["track_id"] == track_id:
                                     person["prev_point"] = (int(track_line[-1][0]), int(track_line[-1][1]))
                                     # Assuming you want to update the time as well
@@ -244,8 +242,54 @@ class YVRObjectCounter:
                             "time": time.time(),
                             "reported": False
                         }
-                        person_case_list.append(person_object)
-                        self.stationary_objects["person"] = person_case_list
+                        suit_case_list.append(person_object)
+                        self.stationary_objects[cls] = suit_case_list
+                if cls == 63:
+                    laptop_case_list = self.stationary_objects.get(cls, [])
+                    current_track_id = [person for person in laptop_case_list if person["track_id"] == track_id]
+                    if current_track_id:
+
+                        if current_track_id[0]["prev_point"] == (int(track_line[-1][0]), int(track_line[-1][1])):
+                            print(time.time() - float(current_track_id[0]["time"]))
+                            print(current_track_id[0]["reported"])
+                            if time.time() - float(current_track_id[0]["time"]) >= 5 and not current_track_id[0][
+                                "reported"]:
+                                print("adding suitcase")
+                                self.db.add_incident(self.im0, "suitcase", datetime.utcnow())
+                                # Initialize an empty list to hold the filtered results
+                                filtered_list = []
+
+                                # Loop through each person in the person_case_list
+                                for person in laptop_case_list:
+                                    # Check if the person's track_id is not equal to track_id
+                                    if person["track_id"] != track_id:
+                                        # If so, add the person to the filtered_list
+                                        filtered_list.append(person)
+                                    else:
+                                        person["reported"] = True
+                                        filtered_list.append(person)
+                                # Update the stationary_objects dictionary with the filtered list for the specific class
+                                self.stationary_objects[cls] = filtered_list
+
+                                # Print the updated stationary_objects dictionary for verification
+                        else:
+                            # Properly updating 'prev_point' for the matching person
+                            for person in laptop_case_list:
+                                if person["track_id"] == track_id:
+                                    person["prev_point"] = (int(track_line[-1][0]), int(track_line[-1][1]))
+                                    # Assuming you want to update the time as well
+                                    person["time"] = time.time()
+                            # No need to assign it back to self.stationary_objects["person"]
+                            # because we modified the list in place
+                    else:
+                        person_object = {
+                            "track_id": track_id,
+                            "prev_point": (int(track_line[-1][0]), int(track_line[-1][1])),
+                            "time": time.time(),
+                            "reported": False
+                        }
+                        laptop_case_list.append(person_object)
+                        self.stationary_objects[cls] = laptop_case_list
                 if cls == -1:
                     person_case_list = self.stationary_objects.get("person", [])
                     current_track_id = [person for person in person_case_list if person["track_id"] == track_id]
