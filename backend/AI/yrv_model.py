@@ -4,11 +4,12 @@ from ultralytics import YOLO
 
 from AI.yvr_object_counter import YVRObjectCounter
 
-region_points = [(570, 360), (550, 400), (750, 250)]
+region_points = [(800, 800), (720, 720), (900, 9000)]
 
 custom_names = {
     0: 'person',
-    28: 'suitcase'
+    28: 'suitcase',
+    63: 'laptop'
 
 }
 
@@ -30,7 +31,7 @@ class YVRModel:
                               line_thickness=2)
 
     def get_tagged_image(self, image_to_tag):
-        tracks = self.model.track(image_to_tag, persist=True, show=False, classes=[0, 28])
+        tracks = self.model.track(image_to_tag, persist=True, show=False, classes=[0, 28, 63])
         image = self.counter.start_counting(image_to_tag, tracks)
         # self.get_count_information()
         if time.time() - self.time_start >= 20:
