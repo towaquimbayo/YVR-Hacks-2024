@@ -34,8 +34,15 @@ export default function Reports() {
     });
   }, [reports, selectedTab]);
 
-  // Mock fetch reports
   useEffect(() => {
+    async function fetchReports() {
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_ENDPOINT + "/get_incidents"
+      );
+      const data = await response.json();
+      console.log("Fetched Reports: ", data);
+    }
+    fetchReports();
     setReports(mockReports);
   }, []);
 

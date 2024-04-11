@@ -12,6 +12,17 @@ export default function LiveMonitor() {
     if (!isLoggedIn) navigate("/login");
   }, [isLoggedIn, navigate]);
 
+  useEffect(() => {
+    async function fetchReports() {
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_ENDPOINT + "/video"
+      );
+      // const data = await response.json();
+      console.log("Fetched Live Video Response:", response);
+    }
+    fetchReports();
+  }, []);
+
   return (
     <Layout
       title="Live Monitor"

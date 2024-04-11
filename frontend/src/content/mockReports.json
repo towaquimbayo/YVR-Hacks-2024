@@ -7,7 +7,7 @@
     "priority": "High",
     "timestamp": "2024-04-06T10:30:00",
     "location": "Terminal A",
-    "video": "https://example.com/baggage_conveyor_jam.mp4",
+    "image": "https://example.com/baggage_conveyor_jam.jpg",
     "resolved": false
   },
   {
@@ -18,7 +18,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-06T11:15:00",
     "location": "Gate B12",
-    "video": "https://example.com/restroom_odor.mp4",
+    "image": "https://example.com/restroom_odor.jpg",
     "resolved": true
   },
   {
@@ -29,7 +29,7 @@
     "priority": "High",
     "timestamp": "2024-04-06T12:00:00",
     "location": "Terminal C",
-    "video": "https://example.com/security_congestion.mp4",
+    "image": "https://example.com/security_congestion.jpg",
     "resolved": false
   },
   {
@@ -40,7 +40,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-06T13:20:00",
     "location": "Food Court",
-    "video": "https://example.com/food_spill.mp4",
+    "image": "https://example.com/food_spill.jpg",
     "resolved": false
   },
   {
@@ -51,7 +51,7 @@
     "priority": "High",
     "timestamp": "2024-04-06T14:45:00",
     "location": "Terminal D",
-    "video": "https://example.com/broken_escalator.mp4",
+    "image": "https://example.com/broken_escalator.jpg",
     "resolved": false
   },
   {
@@ -62,7 +62,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-06T15:10:00",
     "location": "Terminal E",
-    "video": "https://example.com/announcement_failure.mp4",
+    "image": "https://example.com/announcement_failure.jpg",
     "resolved": false
   },
   {
@@ -73,7 +73,7 @@
     "priority": "High",
     "timestamp": "2024-04-06T16:30:00",
     "location": "Baggage Claim",
-    "video": "https://example.com/lost_luggage.mp4",
+    "image": "https://example.com/lost_luggage.jpg",
     "resolved": false
   },
   {
@@ -84,7 +84,7 @@
     "priority": "High",
     "timestamp": "2024-04-06T17:05:00",
     "location": "Runway",
-    "video": "https://example.com/drone_activity.mp4",
+    "image": "https://example.com/drone_activity.jpg",
     "resolved": false
   },
   {
@@ -95,7 +95,7 @@
     "priority": "Low",
     "timestamp": "2024-04-06T18:20:00",
     "location": "Gate F5",
-    "video": "https://example.com/broken_vending_machine.mp4",
+    "image": "https://example.com/broken_vending_machine.jpg",
     "resolved": false
   },
   {
@@ -106,7 +106,7 @@
     "priority": "High",
     "timestamp": "2024-04-06T19:40:00",
     "location": "Boarding Gate of Flight 123",
-    "video": "https://example.com/passenger_altercation.mp4",
+    "image": "https://example.com/passenger_altercation.jpg",
     "resolved": false
   },
   {
@@ -117,7 +117,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-07T08:00:00",
     "location": "Terminal B",
-    "video": "https://example.com/gate_change_confusion.mp4",
+    "image": "https://example.com/gate_change_confusion.jpg",
     "resolved": false
   },
   {
@@ -128,7 +128,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T09:30:00",
     "location": "Baggage Claim",
-    "video": "https://example.com/medical_assistance.mp4",
+    "image": "https://example.com/medical_assistance.jpg",
     "resolved": false
   },
   {
@@ -139,7 +139,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T11:15:00",
     "location": "Tarmac",
-    "video": "https://example.com/fuel_leakage.mp4",
+    "image": "https://example.com/fuel_leakage.jpg",
     "resolved": false
   },
   {
@@ -150,7 +150,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T12:45:00",
     "location": "Terminal F",
-    "video": "https://example.com/power_outage.mp4",
+    "image": "https://example.com/power_outage.jpg",
     "resolved": false
   },
   {
@@ -161,7 +161,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T14:20:00",
     "location": "Check-in Counters",
-    "video": "https://example.com/suspicious_package.mp4",
+    "image": "https://example.com/suspicious_package.jpg",
     "resolved": false
   },
   {
@@ -172,7 +172,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T15:40:00",
     "location": "Runway",
-    "video": "https://example.com/bird_strike.mp4",
+    "image": "https://example.com/bird_strike.jpg",
     "resolved": false
   },
   {
@@ -183,7 +183,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T17:00:00",
     "location": "Gate C7",
-    "video": "https://example.com/water_pipe_burst.mp4",
+    "image": "https://example.com/water_pipe_burst.jpg",
     "resolved": false
   },
   {
@@ -194,7 +194,7 @@
     "priority": "High",
     "timestamp": "2024-04-07T18:30:00",
     "location": "Concourse",
-    "video": "https://example.com/lost_child.mp4",
+    "image": "https://example.com/lost_child.jpg",
     "resolved": false
   },
   {
@@ -205,7 +205,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-07T19:45:00",
     "location": "Terminal D",
-    "video": "https://example.com/ac_malfunction.mp4",
+    "image": "https://example.com/ac_malfunction.jpg",
     "resolved": false
   },
   {
@@ -216,7 +216,7 @@
     "priority": "Medium",
     "timestamp": "2024-04-07T20:55:00",
     "location": "Departure Gates",
-    "video": "https://example.com/luggage_cart_collision.mp4",
+    "image": "https://example.com/luggage_cart_collision.jpg",
     "resolved": false
   }
 ]

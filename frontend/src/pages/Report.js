@@ -128,8 +128,9 @@ export default function Report() {
             </p>
           </div>
           <div className="flex flex-col mt-8">
-            <h2 className="text-xl font-semibold mb-4">Video Playback</h2>
-            <video
+            <h2 className="text-xl font-semibold mb-4">Image Playback</h2>
+            <img src={report.image} alt="Report" className="mx-auto max-w-4xl" />
+            {/* <video
               controls
               width="100%"
               height="100%"
@@ -137,7 +138,7 @@ export default function Report() {
             >
               <source src={report.video} type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
+            </video> */}
           </div>
         </div>
       )}
