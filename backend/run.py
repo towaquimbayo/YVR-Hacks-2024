@@ -9,12 +9,15 @@ import cv2
 from AI.yrv_model import YVRModel
 from Camera.camera import CameraStream
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from constants import CAMERA_1
 
 app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes and methods
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///yvr_hack.db"
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class Counts(db.Model):
@@ -32,9 +35,10 @@ class Incident(db.Model):
     image = db.Column(db.BLOB, nullable=False)
     object = db.Column(db.Text, nullable=False)
     time_unattended = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    location = db.Column(db.Text, nullable=True)  # Assuming location can be nullable
+    location = db.Column(db.Text, nullable=False)  # Assuming location can be nullable
     priority = db.Column(db.Integer, nullable=False, default=0)  # Assuming priority is an integer
     is_resolved = db.Column(db.Boolean, nullable=False, default=False)  # Assuming is_resolved is a boolean
+    category = db.Column(db.Text, nullable=True, default=False)
 
     def __repr__(self):
         return f"Incident(id={self.id}, object={self.object}, time_unattended={self.time_unattended})"
@@ -69,10 +73,12 @@ class DatabaseOperation:
             except Exception as e:
                 print("Error adding count:", e)
 
-    def add_incident(self, image, object, time, location="camera1", priority=0, is_resolved=False):
+    def add_incident(self, image, object, time, location="camera1", priority=0, is_resolved=False,
+                     category="Left Over Item"):
         with app.app_context():
             try:
-                incident = Incident(object=object, time_unattended=time)
+                incident = Incident(object=object, time_unattended=time, location=location, priority=priority,
+                                    is_resolved=is_resolved, category=category)
                 incident.save_image(image)
                 self.db.session.add(incident)
                 self.db.session.commit()
@@ -84,7 +90,7 @@ class DatabaseOperation:
 dbo = DatabaseOperation(db)
 
 model = YVRModel(dbo)
-camera = CameraStream(stream_link=r"rtsp://service:oRATEAM1!@192.168.1.78/?h26x=4&inst=2")
+camera = CameraStream(stream_link=CAMERA_1)
 
 
 def generate_frames():
