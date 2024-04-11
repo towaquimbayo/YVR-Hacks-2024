@@ -171,7 +171,11 @@ def get_incidents():
             'id': incident.id,
             'image': base64.b64encode(incident.image).decode('utf-8'),  # Convert the byte object to base64 string
             'object': incident.object,
-            'time_unattended': incident.time_unattended.strftime('%Y-%m-%d %H:%M:%S')
+            'time_unattended': incident.time_unattended.strftime('%Y-%m-%d %H:%M:%S'),
+            'location': incident.location,  # Added as per the model
+            'priority': incident.priority,  # Assuming you want to include this as is
+            'is_resolved': incident.is_resolved,  # Assuming you want to include this as is
+            'category': incident.category
         })
 
     # Return the incidents as JSON
