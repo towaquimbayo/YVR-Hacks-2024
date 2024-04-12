@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Users } from "lucide-react";
+import { Users, BadgeAlert } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import Layout from "../components/Layout";
 
@@ -63,25 +63,6 @@ export default function Dashboard() {
     { name: 'Sat', count: 23 },
   ];
 
-  const tableData = [
-    { country: 'Australia', domain: 'http://example.com', storage: '4TB', server: 'Active', page: '2.8min', report: 'View' },
-    { country: 'Malaysia', domain: 'http://example.com', storage: '1TB', server: 'Active', page: '2.5min', report: 'View' },
-    { country: 'Portugal', domain: 'http://example.com', storage: '768GB', server: 'Trouble', page: '4.1min', report: 'View' },
-    { country: 'Indonesia', domain: 'http://example.com', storage: '1.4TB', server: 'Active', page: '5.5min', report: 'View' },
-    { country: 'Japan', domain: 'http://example.com', storage: '1TB', server: 'Active', page: '4.1min', report: 'View' },
-    { country: 'Singapore', domain: 'http://example.com', storage: '4TB', server: 'Active', page: '7.0min', report: 'View' },
-  ];
-
-  const barChartData = [
-    { name: 'Sun', most: 40, least: 20 },
-    { name: 'Mon', most: 35, least: 15 },
-    { name: 'Tue', most: 30, least: 22 },
-    { name: 'Wed', most: 28, least: 18 },
-    { name: 'Thu', most: 32, least: 25 },
-    { name: 'Fri', most: 38, least: 30 },
-    { name: 'Sat', most: 45, least: 35 },
-  ];
-
   console.log(reports)
 
   return (
@@ -92,7 +73,7 @@ export default function Dashboard() {
     >
       <div className="grid grid-cols-3 gap-4 mt-8">
         <div className="bg-white col-span-2 rounded-xl p-4 px-6 w-full h-[300px] min-w-[400px]" ref={lineChartRef} >
-          <h2 className="text-md font-semibold mb-4">Weekly Reports</h2>
+          <h2 className="text-md font-semibold mb-4">Weekly Incident Report</h2>
           <ResponsiveContainer>
             <LineChart
               data={lineChartData}
@@ -113,7 +94,17 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
+          <div className="bg-white p-4 rounded-xl flex items-center">
+            <div className="bg-gray-100 rounded-lg p-3 mr-4">
+              <BadgeAlert size={26} color="#666" />
+            </div>
+            <div>
+              <p className="text-gray-500 text-sm">Unresolved Incidents</p>
+              <p className="text-4xl font-semibold">{reports && reports.filter(report => !report.is_resolved).length}</p>
+            </div>
+          </div>
+
           <div className="bg-white p-4 rounded-xl flex items-center">
             <div className="bg-gray-100 rounded-lg p-3 mr-4">
               <Users size={26} color="#666" />
@@ -123,48 +114,62 @@ export default function Dashboard() {
               <p className="text-4xl font-semibold">188</p>
             </div>
           </div>
+
+          {/* <div>
+            <h2 className="text-xl font-semibold mb-4">Server Status Overview</h2>
+            <BarChart width={300} height={300} data={barChartData}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Bar dataKey="most" fill="#8884d8" />
+              <Bar dataKey="least" fill="#82ca9d" />
+            </BarChart>
+          </div> */}
         </div>
 
         <div className="bg-white col-span-3 rounded-xl p-4 px-6 ">
-          <h2 className="text-md font-semibold mb-4">Latest Reports</h2>
+          <h2 className="text-md font-semibold mb-4">Latest Incidents</h2>
           <table className="w-full">
             <thead>
-              <tr>
-                <th>Country</th>
-                <th>Domain Name</th>
-                <th>Storage</th>
-                <th>Server Status</th>
-                <th>Page Load</th>
-                <th>Document Report</th>
+              <tr className="text-left text-sm">
+                <th className="bg-gray-100 p-2 text-gray-500 rounded-s-lg">Title</th>
+                <th className="bg-gray-100 p-2 text-gray-500">Category</th>
+                <th className="bg-gray-100 p-2 text-gray-500">Location</th>
+                <th className="bg-gray-100 p-2 text-gray-500">Priority</th>
+                <th className="bg-gray-100 p-2 text-gray-500 hidden lg:block">Timestamp</th>
+                <th className="bg-gray-100 p-2 text-gray-500 rounded-e-lg">Status</th>
               </tr>
             </thead>
             <tbody>
-              {tableData.map((row, index) => (
-                <tr key={index}>
-                  <td>{row.country}</td>
-                  <td>{row.domain}</td>
-                  <td>{row.storage}</td>
-                  <td>{row.server}</td>
-                  <td>{row.page}</td>
-                  <td>{row.report}</td>
-                </tr>
-              ))}
+              {reports && reports.slice(0, 10).map((row, index) => {
+                let priorityColor;
+                if (row.priority === 'Low') {
+                  priorityColor = 'bg-[#3dce79]';
+                } else if (row.priority === 'Medium') {
+                  priorityColor = 'bg-[#f69952]';
+                } else if (row.priority === 'High') {
+                  priorityColor = 'bg-[#ee4c4c]';
+                }
+
+                return (
+                  <tr key={index}>
+                    <td className="p-2">{row.title}</td>
+                    <td className="p-2">{row.category}</td>
+                    <td className="p-2">{row.location}</td>
+                    <td className="p-2">
+                      <span className={`rounded-full py-1 px-4 text-white ${priorityColor}`}>
+                        {row.priority}
+                      </span>
+                    </td>
+                    <td className="p-2 hidden lg:block">{row.time_unattended}</td>
+                    <td className="p-2">{row.is_resolved ? 'Resolved' : 'Unresolved'}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
-
-        {/* <div>
-          <h2 className="text-xl font-semibold mb-4">Server Status Overview</h2>
-          <BarChart width={500} height={300} data={barChartData}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="most" fill="#8884d8" />
-            <Bar dataKey="least" fill="#82ca9d" />
-          </BarChart>
-        </div> */}
       </div>
     </Layout>
   );

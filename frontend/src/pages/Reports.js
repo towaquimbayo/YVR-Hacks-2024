@@ -20,6 +20,7 @@ export default function Reports() {
   useEffect(() => {
     if (!isLoggedIn) navigate("/login");
   }, [isLoggedIn, navigate]);
+
   const tabs = ["All", "Resolved", "Unresolved"];
   const [reports, setReports] = useState();
   const [selectedTab, setSelectedTab] = useState("Unresolved");
@@ -156,11 +157,10 @@ export default function Reports() {
               key={index}
               value={tab}
               onClick={() => setSelectedTab(tab)}
-              className={`px-4 py-2 ${
-                selectedTab === tab
+              className={`px-4 py-2 ${selectedTab === tab
                   ? "text-primary font-medium"
                   : "text-black font-normal"
-              }`}
+                }`}
             >
               {tab}
             </Tab>
