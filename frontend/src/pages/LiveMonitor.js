@@ -23,10 +23,12 @@ export default function LiveMonitor() {
       </p>
       <div className="mt-4 max-w-[800px]">
         <ReactPlayer
-          url={{
-            src: process.env.REACT_APP_SERVER_ENDPOINT + "/video",
-            type: "multipart/x-mixed-replace",
-          }}
+          url={[
+            {
+              src: process.env.REACT_APP_SERVER_ENDPOINT + "/video",
+              type: "multipart/x-mixed-replace",
+            },
+          ]}
           muted
           playing
           controls

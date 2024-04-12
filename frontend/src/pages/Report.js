@@ -155,12 +155,6 @@ export default function Report() {
               </div>
             </div>
             <div className="flex flex-col mt-8">
-              <h2 className="text-xl font-semibold mb-4">Description</h2>
-              <p className="text-md font-normal text-gray-700">
-                {report.description}
-              </p>
-            </div>
-            <div className="flex flex-col mt-8">
               <h2 className="text-xl font-semibold mb-4">Image Playback</h2>
               <img
                 src={report.image}

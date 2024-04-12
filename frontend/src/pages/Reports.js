@@ -10,7 +10,6 @@ import {
 } from "@material-tailwind/react";
 import { Circle, CircleCheck } from "lucide-react";
 import Layout from "../components/Layout";
-import mockReports from "../content/mockReports.json";
 import { getDateTime } from "../utils/Helpers";
 
 export default function Reports() {
