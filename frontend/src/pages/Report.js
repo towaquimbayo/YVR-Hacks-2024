@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Calendar, Map, MoveLeft } from "lucide-react";
 import Layout from "../components/Layout";
-import mockReports from "../content/mockReports.json";
 import { getDateTime } from "../utils/Helpers";
 import Button from "../components/Button";
 
@@ -18,16 +17,47 @@ export default function Report() {
     if (!isLoggedIn) navigate("/login");
   }, [isLoggedIn, navigate]);
 
-  // mock fetch reports
   useEffect(() => {
-    const id = new URLSearchParams(window.location.search).get("id");
-    const fetchedReport = mockReports.find(
-      (report) => report.id === Number(id)
-    );
-    setReport(fetchedReport);
-    setTimeout(() => {
-      setFetching(false);
-    }, 1000);
+    async function fetchReport() {
+      try {
+        const response = await fetch(
+          process.env.REACT_APP_SERVER_ENDPOINT + "/get_incidents"
+        );
+        if (!response.ok) throw new Error("Failed to fetch reports");
+        const data = await response.json();
+        console.log("Fetched Reports: ", data);
+
+        if (!data || !data.length || data.length === 0) {
+          setReport({});
+          return;
+        }
+
+        // find the incident with the id
+        const priority = ["Low", "Medium", "High"];
+        const id = new URLSearchParams(window.location.search).get("id");
+        const fetchedReport = data.find((report) => report.id === Number(id));
+        if (!fetchedReport) {
+          setReport({});
+          return;
+        }
+
+        setReport({
+          id: fetchedReport.id,
+          title: fetchedReport.object + " at " + fetchedReport.location,
+          category: fetchedReport.category || "Unknown category",
+          location: fetchedReport.location,
+          image: "data:image/jpeg;charset=utf-8;base64," + fetchedReport.image,
+          priority: priority[fetchedReport.priority],
+          timestamp: fetchedReport.time_unattended,
+          resolved: fetchedReport.is_resolved,
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setFetching(false);
+      }
+    }
+    fetchReport();
   }, []);
 
   function handleReportStatus() {
@@ -92,56 +122,56 @@ export default function Report() {
         </div>
       }
     >
-      {!fetching && (
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between gap-4 mb-8 w-full">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-4">
-                <span className="text-md text-primary font-medium">
-                  {report.category}
-                </span>
-                <ReportPriority priority={report.priority} />
+      {!fetching &&
+        (report && Object.keys(report).length > 0 ? (
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between gap-4 mb-8 w-full">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-4">
+                  <span className="text-md text-primary font-medium">
+                    {report.category}
+                  </span>
+                  <ReportPriority priority={report.priority} />
+                </div>
+              </div>
+              <Button
+                title={
+                  report.resolved ? "Mark as Unresolved" : "Mark as Resolved"
+                }
+                onClick={handleReportStatus}
+                text={
+                  report.resolved ? "Mark as Unresolved" : "Mark as Resolved"
+                }
+              />
+            </div>
+            <div className="flex gap-2 items-center mb-4">
+              <div className="flex gap-2 items-center">
+                <Calendar size={18} />
+                <p>Posted on {getDateTime(report.timestamp)}</p>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Map size={18} />
+                <p>Reported at {report.location}</p>
               </div>
             </div>
-            <Button
-              title={
-                report.resolved ? "Mark as Unresolved" : "Mark as Resolved"
-              }
-              onClick={handleReportStatus}
-              text={report.resolved ? "Mark as Unresolved" : "Mark as Resolved"}
-            />
-          </div>
-          <div className="flex gap-2 items-center mb-4">
-            <div className="flex gap-2 items-center">
-              <Calendar size={18} />
-              <p>Posted on {getDateTime(report.timestamp)}</p>
+            <div className="flex flex-col mt-8">
+              <h2 className="text-xl font-semibold mb-4">Description</h2>
+              <p className="text-md font-normal text-gray-700">
+                {report.description}
+              </p>
             </div>
-            <div className="flex gap-2 items-center">
-              <Map size={18} />
-              <p>Reported at {report.location}</p>
+            <div className="flex flex-col mt-8">
+              <h2 className="text-xl font-semibold mb-4">Image Playback</h2>
+              <img
+                src={report.image}
+                alt="Report"
+                className="mx-auto max-w-4xl"
+              />
             </div>
           </div>
-          <div className="flex flex-col mt-8">
-            <h2 className="text-xl font-semibold mb-4">Description</h2>
-            <p className="text-md font-normal text-gray-700">
-              {report.description}
-            </p>
-          </div>
-          <div className="flex flex-col mt-8">
-            <h2 className="text-xl font-semibold mb-4">Image Playback</h2>
-            <img src={report.image} alt="Report" className="mx-auto max-w-4xl" />
-            {/* <video
-              controls
-              width="100%"
-              height="100%"
-              className="mx-auto max-w-4xl"
-            >
-              <source src={report.video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> */}
-          </div>
-        </div>
-      )}
+        ) : (
+          <h1 className="text-3xl font-semibold">Report not found.</h1>
+        ))}
     </Layout>
   );
 }

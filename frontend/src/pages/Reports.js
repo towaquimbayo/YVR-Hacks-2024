@@ -23,7 +23,7 @@ export default function Reports() {
   }, [isLoggedIn, navigate]);
   const tabs = ["All", "Resolved", "Unresolved"];
   const [reports, setReports] = useState();
-  const [selectedTab, setSelectedTab] = useState("Resolved");
+  const [selectedTab, setSelectedTab] = useState("Unresolved");
   const filteredReports = useMemo(() => {
     if (!reports || !reports.length || !reports.length === 0) return [];
     return reports.filter(({ is_resolved }) => {
@@ -130,9 +130,6 @@ export default function Reports() {
               {report.location}
             </p>
           </div>
-          <p className="text-sm text-gray-700 font-normal">
-            {report.description}
-          </p>
         </div>
       </div>
     );
