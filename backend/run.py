@@ -2,7 +2,8 @@ import base64
 import sqlite3
 import time
 from datetime import datetime
-from flask_cors import CORS
+
+from flask_cors import CORS, cross_origin
 import numpy as np
 from flask import Flask, Response, jsonify
 import cv2
@@ -10,7 +11,7 @@ from AI.yrv_model import YVRModel
 from Camera.camera import CameraStream
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from constants import CAMERA_1
+from constants import CAMERA_BCIT, FILE_LINK
 
 app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes and methods
@@ -90,7 +91,7 @@ class DatabaseOperation:
 dbo = DatabaseOperation(db)
 
 model = YVRModel(dbo)
-camera = CameraStream(stream_link=CAMERA_1)
+camera = CameraStream(stream_link=CAMERA_BCIT)
 
 
 def generate_frames():
@@ -130,6 +131,7 @@ def regular():
 
 
 @app.route('/video')
+@cross_origin()
 def video():
     return Response(generate_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
@@ -191,4 +193,4 @@ with app.app_context():
     db.create_all()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
