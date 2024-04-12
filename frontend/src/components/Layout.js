@@ -32,16 +32,15 @@ export default function Layout({
           <MobileNav menuActive={menuActive} setMenuActive={setMenuActive} />
         )}
         <div
-          className={`bg-gray-100 w-full ml-0 md:ml-[250px] ${isLoggedIn ? "rounded-3xl p-8" : ""
-            }`}
+          className={`bg-gray-100 w-full ${
+            isLoggedIn ? "rounded-3xl p-8 ml-0 md:ml-[250px]" : ""
+          }`}
         >
           {heading && (
             <div className="flex items-center mb-4 gap-4 justify-between">
               {heading}
               <div className="flex gap-4">
-                <button
-                  className="block bg-white p-2 rounded-lg"
-                >
+                <button className="block bg-white p-2 rounded-lg">
                   <Bell size={20} />
                 </button>
 
