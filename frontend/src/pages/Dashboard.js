@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Users, BadgeAlert } from "lucide-react";
+import { Users, BadgeAlert, Timer } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import Layout from "../components/Layout";
 
@@ -54,13 +54,13 @@ export default function Dashboard() {
   }, []);
 
   const lineChartData = [
-    { name: 'Sun', count: 12 },
-    { name: 'Mon', count: 40 },
-    { name: 'Tue', count: 30 },
-    { name: 'Wed', count: 20 },
-    { name: 'Thu', count: 55 },
-    { name: 'Fri', count: 9 },
-    { name: 'Sat', count: 23 },
+    { name: 'Sun', incidents: 12, people: 100 },
+    { name: 'Mon', incidents: 40, people: 200 },
+    { name: 'Tue', incidents: 30, people: 850 },
+    { name: 'Wed', incidents: 20, people: 398 },
+    { name: 'Thu', incidents: 55, people: 120 },
+    { name: 'Fri', incidents: 90, people: 300 },
+    { name: 'Sat', incidents: 23, people: 742 },
   ];
 
   console.log(reports)
@@ -73,11 +73,11 @@ export default function Dashboard() {
     >
       <div className="grid grid-cols-3 gap-4 mt-8">
         <div className="bg-white col-span-2 rounded-xl p-4 px-6 w-full h-[300px] min-w-[400px]" ref={lineChartRef} >
-          <h2 className="text-md font-semibold mb-4">Weekly Incident Report</h2>
+          <h2 className="text-md font-semibold mb-4">Weekly Overview</h2>
           <ResponsiveContainer>
             <LineChart
               data={lineChartData}
-              margin={{ left: -35, bottom: 35 }}
+              margin={{ left: -25, bottom: 35 }}
             >
               <XAxis
                 dataKey="name"
@@ -89,7 +89,8 @@ export default function Dashboard() {
               <YAxis tickLine={false} tick={{ fontSize: 12 }} stroke="rgba(0, 0, 0, 0.3)" />
               <CartesianGrid strokeOpacity={0.3} />
               <Tooltip />
-              <Line type="monotone" dataKey="count" stroke="#508cdb" activeDot={{ r: 6 }} />
+              <Line type="monotone" dataKey="incidents" stroke="#508cdb" activeDot={{ r: 6 }} />
+              <Line type="monotone" dataKey="people" stroke="#f69952" activeDot={{ r: 6 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -112,6 +113,16 @@ export default function Dashboard() {
             <div>
               <p className="text-gray-500 text-sm">Current People</p>
               <p className="text-4xl font-semibold">188</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl flex items-center">
+            <div className="bg-gray-100 rounded-lg p-3 mr-4">
+              <Timer size={26} color="#666" />
+            </div>
+            <div>
+              <p className="text-gray-500 text-sm">Avg. Response Time</p>
+              <p className="text-4xl font-semibold">12m</p>
             </div>
           </div>
 
@@ -142,31 +153,40 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {reports && reports.slice(0, 10).map((row, index) => {
-                let priorityColor;
-                if (row.priority === 'Low') {
-                  priorityColor = 'bg-[#3dce79]';
-                } else if (row.priority === 'Medium') {
-                  priorityColor = 'bg-[#f69952]';
-                } else if (row.priority === 'High') {
-                  priorityColor = 'bg-[#ee4c4c]';
-                }
+              {reports && reports
+                .sort((a, b) => {
+                  const priorityOrder = { High: 0, Medium: 1, Low: 2 };
+                  if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
+                    return priorityOrder[a.priority] - priorityOrder[b.priority];
+                  }
+                  return new Date(b.time_unattended) - new Date(a.time_unattended);
+                })
+                .slice(0, 10)
+                .map((row, index) => {
+                  let priorityColor;
+                  if (row.priority === 'Low') {
+                    priorityColor = 'bg-[#3dce79]';
+                  } else if (row.priority === 'Medium') {
+                    priorityColor = 'bg-[#f69952]';
+                  } else if (row.priority === 'High') {
+                    priorityColor = 'bg-[#ee4c4c]';
+                  }
 
-                return (
-                  <tr key={index}>
-                    <td className="p-2">{row.title}</td>
-                    <td className="p-2">{row.category}</td>
-                    <td className="p-2">{row.location}</td>
-                    <td className="p-2">
-                      <span className={`rounded-full py-1 px-4 text-white ${priorityColor}`}>
-                        {row.priority}
-                      </span>
-                    </td>
-                    <td className="p-2 hidden lg:block">{row.time_unattended}</td>
-                    <td className="p-2">{row.is_resolved ? 'Resolved' : 'Unresolved'}</td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={index}>
+                      <td className="p-2">{row.title}</td>
+                      <td className="p-2">{row.category}</td>
+                      <td className="p-2">{row.location}</td>
+                      <td className="p-2">
+                        <span className={`rounded-lg py-1 px-4 text-white ${priorityColor}`}>
+                          {row.priority}
+                        </span>
+                      </td>
+                      <td className="p-2 hidden lg:block">{row.time_unattended}</td>
+                      <td className="p-2">{row.is_resolved ? 'Resolved' : 'Unresolved'}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
