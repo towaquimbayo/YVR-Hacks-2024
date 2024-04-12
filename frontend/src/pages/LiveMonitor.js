@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ReactPlayer from "react-player";
 import Layout from "../components/Layout";
 
 export default function LiveMonitor() {
@@ -19,24 +18,16 @@ export default function LiveMonitor() {
       heading={<h1 className="text-3xl font-semibold">Live Monitor</h1>}
     >
       <p className="text-lg">
-        View the live video feed from the security camera.
+        View the live video footage from the security camera.
       </p>
-      <div className="mt-4 max-w-[800px]">
-        <ReactPlayer
-          url={[
-            {
-              src: process.env.REACT_APP_SERVER_ENDPOINT + "/video",
-              type: "multipart/x-mixed-replace",
-            },
-          ]}
-          muted
-          playing
-          controls
-          width="100%"
-          height="100%"
-          onError={(e) => console.log("Error:", e)}
-          fallback={<p>Your browser does not support the video tag.</p>}
-        />
+      <div className="mt-4 relative max-w-full max-h-full aspect-w-16 aspect-h-9">
+        <iframe
+          id="live-monitor"
+          src={process.env.REACT_APP_SERVER_ENDPOINT + "/video"}
+          title="Live Monitor"
+          className="relative w-full h-[740px] aspect-w-[16] aspect-h-[9]"
+          allow="autoplay; fullscreen"
+        ></iframe>
       </div>
     </Layout>
   );
