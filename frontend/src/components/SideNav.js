@@ -7,7 +7,7 @@ export default function SideNav() {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-[250px] h-[calc(100vh-1.5rem)] pr-3 py-3 hidden flex-col justify-between md:flex">
+    <div className="w-[250px] fixed h-[calc(100vh-1.5rem)] pr-3 py-3 hidden flex-col justify-between md:flex">
       <div>
         <h1 className="text-2xl font-bold pl-3">Crow's Nest</h1>
         <ul className="flex flex-col gap-2 pt-16">

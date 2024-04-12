@@ -32,7 +32,7 @@ export default function Layout({
           <MobileNav menuActive={menuActive} setMenuActive={setMenuActive} />
         )}
         <div
-          className={`bg-gray-100 w-full ${isLoggedIn ? "rounded-3xl p-12" : ""
+          className={`bg-gray-100 w-full ml-0 md:ml-[250px] ${isLoggedIn ? "rounded-3xl p-12" : ""
             }`}
         >
           {heading && (
