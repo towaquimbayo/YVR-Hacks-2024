@@ -3,13 +3,14 @@ import { Loader } from "lucide-react";
 export default function Button({
   type = "button",
   title,
-  onClick = () => {},
+  onClick = () => { },
   loading,
   text,
   children,
   full = false,
   outline = false,
   disabled = false,
+  className = "",
 }) {
   const classnames = [
     outline
@@ -31,7 +32,7 @@ export default function Button({
         }
         onClick(e);
       }}
-      className={`focus:outline-none py-2 rounded-lg transition-all duration-300 border-primary border-2 font-medium ${classnames}`}
+      className={`focus:outline-none py-2 rounded-lg transition-all duration-300 border-primary border-2 font-medium ${classnames} ${className}`}
     >
       {loading ? (
         <>

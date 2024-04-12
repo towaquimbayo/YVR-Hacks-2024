@@ -5,6 +5,9 @@
 
 * {
   font-family: "Inter", sans-serif;
+  --errorColor: #ff0033;
+  --successColor: #00cc66;
+  --infoColor: #0066ff;
 }
 
 li {
@@ -14,7 +17,60 @@ li {
   @apply cursor-pointer;
 }
 
-li:has(.active) {
+li:has(.active),
+li:has(.active):hover {
   @apply bg-primary;
   @apply text-white;
+}
+
+.alertMessageContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.25rem;
+  -webkit-transition: all ease-in-out 0.3s;
+  -moz-transition: all ease-in-out 0.3s;
+  -ms-transition: all ease-in-out 0.3s;
+  -o-transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.3s;
+}
+
+.alertMessageContainer p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  text-align: left;
+  padding-left: 0.5rem;
+  width: 100%;
+}
+
+.alertMessageContainer svg {
+  width: 1.5rem;
+  height: auto;
+}
+
+.alertMessageContainer.error {
+  border: solid 1px var(--errorColor);
+}
+
+.alertMessageContainer.error p {
+  color: var(--errorColor);
+}
+
+.alertMessageContainer.success {
+  border: solid 1px var(--successColor);
+}
+
+.alertMessageContainer.success p {
+  color: var(--successColor);
+}
+
+.alertMessageContainer.info {
+  border: solid 1px var(--infoColor);
+}
+
+.alertMessageContainer.info p {
+  color: var(--infoColor);
 }
