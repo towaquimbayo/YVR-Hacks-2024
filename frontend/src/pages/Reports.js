@@ -36,11 +36,16 @@ export default function Reports() {
 
   useEffect(() => {
     async function fetchReports() {
-      const response = await fetch(
-        process.env.REACT_APP_SERVER_ENDPOINT + "/get_incidents"
-      );
-      const data = await response.json();
-      console.log("Fetched Reports: ", data);
+      try {
+        const response = await fetch(
+          process.env.REACT_APP_SERVER_ENDPOINT + "/get_incidents"
+        );
+        if (!response.ok) throw new Error("Failed to fetch reports");
+        const data = await response.json();
+        console.log("Fetched Reports: ", data);
+      } catch (error) {
+        console.error(error);
+      }
     }
     fetchReports();
     setReports(mockReports);

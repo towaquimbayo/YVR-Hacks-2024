@@ -14,7 +14,8 @@ li {
   @apply cursor-pointer;
 }
 
-li:has(.active) {
+li:has(.active),
+li:has(.active):hover {
   @apply bg-primary;
   @apply text-white;
 }
