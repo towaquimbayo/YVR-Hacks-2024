@@ -26,10 +26,10 @@ export default function Reports() {
   const [selectedTab, setSelectedTab] = useState("Resolved");
   const filteredReports = useMemo(() => {
     if (!reports || !reports.length || !reports.length === 0) return [];
-    return reports.filter(({ resolved }) => {
+    return reports.filter(({ is_resolved }) => {
       if (selectedTab === "All") return true;
-      if (selectedTab === "Unresolved") return !resolved;
-      if (selectedTab === "Resolved") return resolved;
+      if (selectedTab === "Unresolved") return !is_resolved;
+      if (selectedTab === "Resolved") return is_resolved;
       return false;
     });
   }, [reports, selectedTab]);
@@ -43,12 +43,33 @@ export default function Reports() {
         if (!response.ok) throw new Error("Failed to fetch reports");
         const data = await response.json();
         console.log("Fetched Reports: ", data);
+
+        if (!data || !data.length || data.length === 0) {
+          setReports([]);
+          return;
+        }
+
+        const priority = ["Low", "Medium", "High"];
+        let incidents = [];
+        data.forEach((incident) => {
+          incidents.push({
+            id: incident.id,
+            title: incident.object + " at " + incident.location,
+            category: incident.category || "Unknown category",
+            location: incident.location,
+            image: incident.image,
+            priority: priority[incident.priority],
+            time_unattended: incident.time_unattended,
+            is_resolved: incident.is_resolved,
+          });
+        });
+        setReports(incidents);
+        // setReports(mockReports);
       } catch (error) {
         console.error(error);
       }
     }
     fetchReports();
-    setReports(mockReports);
   }, []);
 
   function ReportPriority({ priority }) {
@@ -82,7 +103,7 @@ export default function Reports() {
         onClick={() => navigate(`/report?id=${report.id}`)}
       >
         <div className="w-fit p-1 cursor-pointer">
-          {report.resolved ? (
+          {report.is_resolved ? (
             <CircleCheck size={24} className="text-[#63d873]" />
           ) : (
             <Circle size={24} className="text-gray-700" />
@@ -102,7 +123,7 @@ export default function Reports() {
           </div>
           <div className="flex gap-2 items-center">
             <p className="text-sm text-gray-700 font-normal">
-              {getDateTime(report.timestamp)}
+              {getDateTime(report.time_unattended)}
             </p>
             {" | "}
             <p className="text-sm text-gray-700 font-normal">
@@ -173,57 +194,6 @@ export default function Reports() {
               </TabPanel>
             ))
           )}
-          {/* <table className="w-full bg-white shadow-md p-0 mt-4">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="py-2 px-4 text-left text-sm font-semibold">Resolved</th>
-                <th className="py-2 px-4 text-left text-sm font-semibold">Title</th>
-                <th className="py-2 px-4 text-left text-sm font-semibold">Category</th>
-                <th className="py-2 px-4 text-left text-sm font-semibold">Priority</th>
-                <th className="py-2 px-4 text-left text-sm font-semibold">Timestamp</th>
-                <th className="py-2 px-4 text-left text-sm font-semibold">Location</th>
-                <th className="py-2 px-4 text-left text-sm font-semibold">Video</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredReports.map((report) => {
-                return (
-                  <tr key={report.id} className="border-b border-gray-200">
-                    <td className="py-2 px-4">
-                      {report.resolved ? (
-                        <CircleCheck size={24} className="text-[#63d873]" />
-                      ) : (
-                        <Circle size={24} className="text-gray-600" />
-                      )}
-                    </td>
-                    <td className="py-2 px-4 text-sm text-ellipsis">
-                      {report.title}
-                    </td>
-                    <td className="py-2 px-4 text-sm text-ellipsis">
-                      {report.category}
-                    </td>
-                    <td className="py-2 px-4 text-sm text-ellipsis">
-                      {report.priority}
-                    </td>
-                    <td className="py-2 px-4 text-sm text-ellipsis">
-                      {getDateTime(report.timestamp)}
-                    </td>
-                    <td className="py-2 px-4 text-sm text-ellipsis">
-                      {report.location}
-                    </td>
-                    <td className="py-2 px-4 text-sm text-ellipsis">
-                      <Link
-                        to={report.video}
-                        className="text-primary hover:underline hover:text-secondary transition-all duration-800 ease-in-out"
-                      >
-                        {report.video}
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table> */}
         </TabsBody>
       </Tabs>
     </Layout>

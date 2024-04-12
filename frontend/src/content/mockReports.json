@@ -5,10 +5,10 @@
     "description": "One of the baggage conveyors in Terminal A has jammed, causing delays in luggage delivery.",
     "category": "Technical Malfunction",
     "priority": "High",
-    "timestamp": "2024-04-06T10:30:00",
+    "time_unattended": "2024-04-06T10:30:00",
     "location": "Terminal A",
     "image": "https://example.com/baggage_conveyor_jam.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 1,
@@ -16,10 +16,10 @@
     "description": "Unpleasant smell detected in the restroom near Gate B12, affecting passenger experience.",
     "category": "Sanitary Issue",
     "priority": "Medium",
-    "timestamp": "2024-04-06T11:15:00",
+    "time_unattended": "2024-04-06T11:15:00",
     "location": "Gate B12",
     "image": "https://example.com/restroom_odor.jpg",
-    "resolved": true
+    "is_resolved": true
   },
   {
     "id": 2,
@@ -27,10 +27,10 @@
     "description": "Long queues observed at the security checkpoint in Terminal C, causing delays for departing passengers.",
     "category": "Crowd Management",
     "priority": "High",
-    "timestamp": "2024-04-06T12:00:00",
+    "time_unattended": "2024-04-06T12:00:00",
     "location": "Terminal C",
     "image": "https://example.com/security_congestion.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 3,
@@ -38,10 +38,10 @@
     "description": "A large spill of food and beverages occurred in the food court area, creating a slip hazard.",
     "category": "Cleanliness",
     "priority": "Medium",
-    "timestamp": "2024-04-06T13:20:00",
+    "time_unattended": "2024-04-06T13:20:00",
     "location": "Food Court",
     "image": "https://example.com/food_spill.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 4,
@@ -49,10 +49,10 @@
     "description": "The escalator leading to the departure gates in Terminal D is out of service, requiring maintenance.",
     "category": "Infrastructure Issue",
     "priority": "High",
-    "timestamp": "2024-04-06T14:45:00",
+    "time_unattended": "2024-04-06T14:45:00",
     "location": "Terminal D",
     "image": "https://example.com/broken_escalator.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 5,
@@ -60,10 +60,10 @@
     "description": "The public announcement system in Terminal E failed to notify passengers of flight delays.",
     "category": "Communication Failure",
     "priority": "Medium",
-    "timestamp": "2024-04-06T15:10:00",
+    "time_unattended": "2024-04-06T15:10:00",
     "location": "Terminal E",
     "image": "https://example.com/announcement_failure.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 6,
@@ -71,10 +71,10 @@
     "description": "Passenger reported their luggage missing upon arrival at the baggage claim area.",
     "category": "Customer Service",
     "priority": "High",
-    "timestamp": "2024-04-06T16:30:00",
+    "time_unattended": "2024-04-06T16:30:00",
     "location": "Baggage Claim",
     "image": "https://example.com/lost_luggage.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 7,
@@ -82,10 +82,10 @@
     "description": "Unauthorized drone spotted flying near the runway, posing a potential safety risk.",
     "category": "Security Threat",
     "priority": "High",
-    "timestamp": "2024-04-06T17:05:00",
+    "time_unattended": "2024-04-06T17:05:00",
     "location": "Runway",
     "image": "https://example.com/drone_activity.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 8,
@@ -93,10 +93,10 @@
     "description": "One of the vending machines near Gate F5 is malfunctioning, not dispensing items properly.",
     "category": "Facility Maintenance",
     "priority": "Low",
-    "timestamp": "2024-04-06T18:20:00",
+    "time_unattended": "2024-04-06T18:20:00",
     "location": "Gate F5",
     "image": "https://example.com/broken_vending_machine.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 9,
@@ -104,10 +104,10 @@
     "description": "Two passengers engaged in a verbal altercation at the boarding gate of Flight 123.",
     "category": "Security Incident",
     "priority": "High",
-    "timestamp": "2024-04-06T19:40:00",
+    "time_unattended": "2024-04-06T19:40:00",
     "location": "Boarding Gate of Flight 123",
     "image": "https://example.com/passenger_altercation.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 10,
@@ -115,10 +115,10 @@
     "description": "Passengers are confused about a last-minute gate change for Flight 456, causing congestion and frustration.",
     "category": "Communication Issue",
     "priority": "Medium",
-    "timestamp": "2024-04-07T08:00:00",
+    "time_unattended": "2024-04-07T08:00:00",
     "location": "Terminal B",
     "image": "https://example.com/gate_change_confusion.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 11,
@@ -126,10 +126,10 @@
     "description": "A passenger has collapsed near the baggage claim area and requires immediate medical attention.",
     "category": "Medical Emergency",
     "priority": "High",
-    "timestamp": "2024-04-07T09:30:00",
+    "time_unattended": "2024-04-07T09:30:00",
     "location": "Baggage Claim",
     "image": "https://example.com/medical_assistance.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 12,
@@ -137,10 +137,10 @@
     "description": "A small aircraft is leaking fuel on the tarmac, requiring urgent containment and cleanup.",
     "category": "Environmental Hazard",
     "priority": "High",
-    "timestamp": "2024-04-07T11:15:00",
+    "time_unattended": "2024-04-07T11:15:00",
     "location": "Tarmac",
     "image": "https://example.com/fuel_leakage.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 13,
@@ -148,10 +148,10 @@
     "description": "A sudden power outage has occurred in Terminal F, affecting lighting, escalators, and flight information displays.",
     "category": "Infrastructure Failure",
     "priority": "High",
-    "timestamp": "2024-04-07T12:45:00",
+    "time_unattended": "2024-04-07T12:45:00",
     "location": "Terminal F",
     "image": "https://example.com/power_outage.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 14,
@@ -159,10 +159,10 @@
     "description": "Security personnel discovered a suspicious package left unattended near the check-in counters, prompting evacuation protocols.",
     "category": "Security Alert",
     "priority": "High",
-    "timestamp": "2024-04-07T14:20:00",
+    "time_unattended": "2024-04-07T14:20:00",
     "location": "Check-in Counters",
     "image": "https://example.com/suspicious_package.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 15,
@@ -170,10 +170,10 @@
     "description": "A bird strike has occurred during takeoff, necessitating runway inspection and potential flight delays.",
     "category": "Aviation Safety",
     "priority": "High",
-    "timestamp": "2024-04-07T15:40:00",
+    "time_unattended": "2024-04-07T15:40:00",
     "location": "Runway",
     "image": "https://example.com/bird_strike.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 16,
@@ -181,10 +181,10 @@
     "description": "A water pipe has burst in the restroom near Gate C7, flooding the area and rendering it unusable.",
     "category": "Facility Damage",
     "priority": "High",
-    "timestamp": "2024-04-07T17:00:00",
+    "time_unattended": "2024-04-07T17:00:00",
     "location": "Gate C7",
     "image": "https://example.com/water_pipe_burst.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 17,
@@ -192,10 +192,10 @@
     "description": "A child has been separated from their guardians in the crowded concourse area, requiring immediate assistance.",
     "category": "Child Safety",
     "priority": "High",
-    "timestamp": "2024-04-07T18:30:00",
+    "time_unattended": "2024-04-07T18:30:00",
     "location": "Concourse",
     "image": "https://example.com/lost_child.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 18,
@@ -203,10 +203,10 @@
     "description": "The air conditioning system in Terminal D is malfunctioning, causing discomfort for passengers and staff.",
     "category": "Facility Maintenance",
     "priority": "Medium",
-    "timestamp": "2024-04-07T19:45:00",
+    "time_unattended": "2024-04-07T19:45:00",
     "location": "Terminal D",
     "image": "https://example.com/ac_malfunction.jpg",
-    "resolved": false
+    "is_resolved": false
   },
   {
     "id": 19,
@@ -214,9 +214,9 @@
     "description": "Two luggage carts collided near the departure gates, causing minor injuries and obstruction.",
     "category": "Accident",
     "priority": "Medium",
-    "timestamp": "2024-04-07T20:55:00",
+    "time_unattended": "2024-04-07T20:55:00",
     "location": "Departure Gates",
     "image": "https://example.com/luggage_cart_collision.jpg",
-    "resolved": false
+    "is_resolved": false
   }
 ]
