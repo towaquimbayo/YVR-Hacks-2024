@@ -14,7 +14,7 @@ Baaj is a powerful computer vision AI software designed specifically for embedde
 
 ## Installation
 
-To install Baaj, follow these steps:
+To install Baaj backend, follow these steps:
 
 1. Clone the Baaj repository to your local machine:
 
@@ -22,17 +22,24 @@ To install Baaj, follow these steps:
     git clone https://github.com/BaajTeam/Baaj.git
     ```
 
-2. Install the required dependencies:
+2. Inside the backend folder install the required dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-3. Follow the setup instructions provided in the documentation to configure Baaj for your specific embedded device and camera setup.
+2. Inside the frontend folder:
+
+    ```bash
+    npm install
+    npm start
+    ```
+
+3. update url's and rtsp stream links to point to relevant locations, backend input stream can also use webcam (replace url with int `0`)
 
 ## Usage
 
 Once Baaj is installed and configured, you can use it to monitor airport maintenance, detect spills, and track passenger volumes. 
-# Please note that the final version requires an edge tpu to run and is not provided here
+# Please note that the final version requires an coral edge tpu to run and what is provided here is an equivalent that can be run on most computers, however, it may not be as performant.
 
 
