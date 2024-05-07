@@ -1,45 +1,50 @@
-## Baaj
+# Baaj - AI Airport Maintenance Monitoring App
+> An AI-powered vision system designed to enhance passenger experience and optimize operational efficiency at the YVR airport by utilizing machine learning to track passenger volumes and identify maintenance needs in real-time using security cameras.
 
-Baaj is a powerful computer vision AI software designed specifically for embedded devices. It provides advanced capabilities for monitoring airport maintenance, noting spills, tracking passenger volumes, and more. Leveraging computer vision technology and utilizing ceiling-mounted cameras, Baaj offers comprehensive surveillance and analytics solutions for airports.
+_Developed by Team Ora for YVR Smart Airport Hackathon 2024. Won :trophy: **1st** :trophy: place in the hackathon._<br />
+
+## Table of Contents
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Features](#features)
+* [Usage](#usage)
+* [Acknowledgements](#acknowledgements)
+
+## Screenshots
+| ![Login Page](screenshots/login.png) | ![Dashboard Page](screenshots/dashboard.png) |
+|:--:|:--:|
+| _Login Page_ | _Dashboard Page_ |
+| ![Reports Page](screenshots/reports.png) | ![Live Monitor Page](screenshots/live_monitor.png) |
+| _Reports Page_ | _Live Monitor Page_ |
+
+## Technologies
+- React.js `v18.2.0`
+- Node.js
+- TailwindCSS
+- Python
+- Flask `v3.0.3`
+- Redux `v5.0.1`
+- YOLOv8
+- TensorFlow Lite
+- Raspberry Pi
+- Bosch Security Camera
 
 ## Features
-
-- **Airport Maintenance Monitoring**: Baaj can detect and monitor maintenance issues within the airport premises, ensuring timely intervention and upkeep.
-
-- **Spill Detection**: With its advanced image recognition algorithms, Baaj can identify spills or hazards on the airport floors, enhancing safety protocols.
-
-- **Passenger Volume Tracking**: Baaj is equipped to track passenger volumes throughout the airport, providing valuable insights for operational management and resource allocation.
-
-- **Ceiling-mounted Camera Integration**: Designed to work seamlessly with ceiling-mounted cameras, Baaj offers optimal coverage and perspective for surveillance and analysis.
-
-## Installation
-
-To install Baaj backend, follow these steps:
-
-1. Clone the Baaj repository to your local machine:
-
-    ```bash
-    git clone https://github.com/BaajTeam/Baaj.git
-    ```
-
-2. Inside the backend folder install the required dependencies:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-2. Inside the frontend folder:
-
-    ```bash
-    npm install
-    npm start
-    ```
-
-3. update url's and rtsp stream links to point to relevant locations, backend input stream can also use webcam (replace url with int `0`)
+- __Airport Maintenance Monitoring__: Detect and monitor maintenance issues within the airport premises, ensuring timely intervention and upkeep.
+- __Spill Detection__: With its advanced image recognition algorithms, Baaj can identify spills or hazards on the airport floors, enhancing safety protocols.
+- __Passenger Volume Tracking__: Track passenger volumes throughout the airport, providing valuable insights for operational management and resource allocation.
+- __Ceiling-mounted Camera Integration__: Designed to work seamlessly with ceiling-mounted cameras, Baaj offers optimal coverage and perspective for surveillance and analysis.
 
 ## Usage
+> [!CAUTION]
+> Please note that the final version requires an coral edge tpu to run and what is provided here is an equivalent that can be run on most computers, however, it may not be as performant.
 
-Once Baaj is installed and configured, you can use it to monitor airport maintenance, detect spills, and track passenger volumes. 
-# Please note that the final version requires an coral edge tpu to run and what is provided here is an equivalent that can be run on most computers, however, it may not be as performant.
+Once Baaj is installed and configured, you can use it to monitor airport maintenance, detect spills, and track passenger volumes.
 
-
+## Acknowledgements
+* [Towa Quimbayo](https://github.com/towaquimbayo)
+* [Abhishek Chouhan](https://github.com/abhishekchouhannk)
+* [Mangat Toor](https://github.com/immangat)
+* [Gurnoor Tatla](https://www.linkedin.com/in/gurnoortatla/)
+* [Bhavnoor Saroya](https://github.com/BhavnoorSaroya)
+* [Ranveer Rai](https://github.com/Ranveerai03)
