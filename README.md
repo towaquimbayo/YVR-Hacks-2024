@@ -105,13 +105,13 @@ Seamlessly connect with existing YVR Aiport security infrastructure.
 
 ## Awards
 
-YVR Crows Nest (Baaj), team ORA has received significant recognition for its innovative approach to streamlining maintenance workflows using AI-driven analytics. At the YVR Hackathon, we were honored with the following awards:
+YVR Crows Nest (Baaj), team ORA has received significant recognition for its innovative approach to streamlining maintenance workflows using AI-driven analytics. At the YVR Hackathon, we were honoured with the following awards:
 
 * :trophy:__1st Place__: Our pioneering approach impressed the judges for its practicality and potential impact, earning us a $5,000 prize. The YVR Hackathon was designed to address real-world challenges within the airport environment, aimed at redefining the future of airport operations and maintenance.
 
 The event attracted over 138 participants from colleges across the Lower Mainland. A panel of judges, comprising industry experts and academic leaders, evaluated the presentations based on innovation, practicality, and scalability. YVR plans to implement some of the top solutions developed during the Hackathon.
 
-For more information, you can read the full articles on the following blogs [here](https://commons.bcit.ca/news/2024/05/yvr-hackathon-2024/).
+For more information, you can read the full article on the following blog [here](https://commons.bcit.ca/news/2024/05/yvr-hackathon-2024/).
 
 > The solutions presented by the students during the hackathon demonstrated to YVR Maintenance that there is an abundance of local talent capable of developing practical solutions using machine learning in a remarkably short time frame. The final submissions will significantly contribute to the development of our Facility Machine Learning Enablement program for 2024. Elements will also be directly implemented or further developed by both student projects for implementation onsite. Events like these reaffirm Maintenance and Innovation teams’ dedication to fostering innovation and community collaboration.
 
