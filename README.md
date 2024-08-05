@@ -3,7 +3,6 @@
 # YVR Crows Nest (Baaj)
 
 ![YVR Crows Nest (Baaj) Thumbnail](screenshots/yvr-crows-nest-thumbnail.jpg)
-An AI-powered vision system designed to enhance passenger experience and optimize operational efficiency at the YVR airport by utilizing machine learning to track passenger volumes and identify maintenance needs in real-time using security cameras.
 
 An AI-powered airport maintenance monitoring application designed to enhance passenger experience and optimize operational efficiency at YVR Airport. By leveraging machine learning algorithms, the application tracks passenger volumes, identifies maintenance needs such as lost baggage, and automates incident reporting for various airport incidents such as spills and lost items. This system connects to YVR Airport's Bosch security cameras and uses advanced visual detection technologies like YOLOv8, TensorFlow Lite, and Google Coral Edge TPU to process real-time video feeds, making it a crucial tool for maintaining airport safety and efficiency.
 
